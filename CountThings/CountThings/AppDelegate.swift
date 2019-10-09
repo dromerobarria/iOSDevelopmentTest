@@ -17,11 +17,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
       
-
-    if let navController = window!.rootViewController as? UINavigationController {
+      let products = [
+           Product(title: "ASD", count: 0, id: "1"),Product(title: "FGH", count: 0, id: "2")]
+      
+      if let navController = window!.rootViewController as? UINavigationController {
 
       if let tableViewController = navController.viewControllers.first as? MainTableViewController {
-       
+          tableViewController.products = products
       }
     }
 
