@@ -10,5 +10,59 @@ import UIKit
 
 enum MainTable
 {
- 
+   enum ProductSelected
+   {
+     struct Request
+     {
+       var name: String?
+       var count: Int?
+     }
+     
+     struct Response
+     {
+     }
+    
+     struct ViewModel
+     {
+     }
+   }
+  
+  
+  enum Update
+  {
+    struct Request
+    {
+      let products : [Product]
+      let product : Product
+    }
+     
+    struct Response
+    {
+      let products : [Product]
+    }
+    
+    struct ViewModel
+    {
+      let products : [Product]
+    }
+  }
+  
+  enum ProductCreate
+  {
+    struct Request
+    {
+      let products : [Product]
+      var name: String?
+    }
+    
+    struct Response
+    {
+      let products : [Product]
+    }
+   
+    struct ViewModel
+    {
+      let products : [Product]
+    }
+  }
 }

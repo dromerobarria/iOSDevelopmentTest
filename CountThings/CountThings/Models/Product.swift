@@ -25,7 +25,7 @@ class Product: NSObject, NSCoding {
         and so they are accessible and usable in Objective-C to interact with other frameworks.
     */
     @objc let title: String
-    @objc let count: Int
+    @objc var count: Int
     @objc let id: String
     
     // MARK: - Initializers

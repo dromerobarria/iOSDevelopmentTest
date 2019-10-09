@@ -11,5 +11,22 @@ import UIKit
 enum Detail
 {
   // MARK: Use cases
-  
+  enum Product
+  {
+    struct Request
+    {
+    }
+    
+    struct Response
+    {
+      var name: String!
+      var count: Int!
+    }
+   
+    struct ViewModel
+    {
+      var name: String!
+      var count: Int!
+    }
+  }
 }

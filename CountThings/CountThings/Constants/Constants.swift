@@ -27,7 +27,13 @@ struct Constants
     
     struct General
     {
-       static let titleLabel = NSLocalizedString("CountThings", comment: "")
+       static let titleText = NSLocalizedString("CountThings", comment: "")
+       static let countText = NSLocalizedString("Total", comment: "")
+       static let nameText = NSLocalizedString("Nombre", comment: "")
+       static let navText = NSLocalizedString("iOS Development Test", comment: "")
+       static let createAlertText = NSLocalizedString("Favor ingrese el nombre del elemento", comment: "")
+       static let cancelText = NSLocalizedString("Cancelar", comment: "")
+       static let createText = NSLocalizedString("Crear", comment: "")
     }
     
    

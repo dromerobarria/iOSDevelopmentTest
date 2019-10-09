@@ -9,10 +9,12 @@ import UIKit
 
 protocol MainTableDisplayLogic: class
 {
- 
+  func resultDetail(viewModel: MainTable.ProductSelected.ViewModel)
+  func resultUpdate(viewModel: MainTable.Update.ViewModel)
+  func resultCreate(viewModel: MainTable.ProductCreate.ViewModel)
 }
 
-class MainTableViewController: BaseTableViewController, MainTableDisplayLogic
+class MainTableViewController: BaseTableViewController, MainTableDisplayLogic,ActivityIndicatorPresenter
 {
   var interactor: MainTableBusinessLogic?
   var router: (NSObjectProtocol & MainTableRoutingLogic & MainTableDataPassing)?
@@ -30,6 +32,8 @@ class MainTableViewController: BaseTableViewController, MainTableDisplayLogic
       var wasActive = false
       var wasFirstResponder = false
   }
+  
+  var activityIndicator = UIActivityIndicatorView()
   
   /// Data model for the table view.
   var products = [Product]()
@@ -88,6 +92,7 @@ class MainTableViewController: BaseTableViewController, MainTableDisplayLogic
   override func viewDidLoad()
   {
     super.viewDidLoad()
+    configureNavegationBar()
     
     resultsTableController = ResultsTableController()
 
@@ -109,13 +114,92 @@ class MainTableViewController: BaseTableViewController, MainTableDisplayLogic
     searchController.searchBar.delegate = self
     definesPresentationContext = true
     
+    NotificationCenter.default.addObserver(self, selector: #selector(MainTableViewController.increaseValue), name: Notification.Name("increaseValue"), object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(MainTableViewController.decreaseValue), name: Notification.Name("decreaseValue"), object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(MainTableViewController.deleteProduct), name: Notification.Name("deleteProduct"), object: nil)
+    
+    
+  }
+  
+  func configureNavegationBar()
+  {
+    title = Constants.Messages.General.navText
+    let add = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(MainTableViewController.addTapped))
+    navigationItem.rightBarButtonItems = [add]
+  }
+  
+  
+  @objc func addTapped(_ sender: UIBarButtonItem)
+  {
+    let alert = UIAlertController(title: Constants.Messages.General.navText, message: Constants.Messages.General.createAlertText, preferredStyle: .alert)
+    
+    alert.addTextField()
+
+    let submitAction = UIAlertAction(title: Constants.Messages.General.createText, style: .default) { [unowned alert] _ in
+        let name = alert.textFields![0].text
+        
+        self.showActivityIndicator()
+        let request = MainTable.ProductCreate.Request(products: self.products,name:name)
+        self.interactor?.requestCreate(request: request)
+    }
+
+    alert.addAction(submitAction)
+    alert.addAction(UIAlertAction(title: Constants.Messages.General.cancelText, style: .cancel, handler: nil))
+    
+    self.present(alert, animated: true, completion: nil)
+  }
+  
+  @objc func deleteProduct(_ notification: NSNotification)
+  {
+    if let product = notification.userInfo?["product"] as? Product
+    {
+      self.showActivityIndicator()
+      let request = MainTable.Update.Request(products: products,product:product)
+      self.interactor?.requestDelete(request: request)
+    }
+    
+  }
+  
+  @objc func increaseValue(_ notification: NSNotification)
+  {
+    if let product = notification.userInfo?["product"] as? Product
+    {
+      self.showActivityIndicator()
+      let request = MainTable.Update.Request(products: products,product:product)
+      self.interactor?.requestIncrease(request: request)
+    }
+  }
+  
+  @objc func decreaseValue(_ notification: NSNotification)
+  {
+    if let product = notification.userInfo?["product"] as? Product
+    {
+      self.showActivityIndicator()
+      let request = MainTable.Update.Request(products: products,product:product)
+      self.interactor?.requestDecrease(request: request)
+    }
   }
   
   // MARK: CountThings
+  func resultDetail(viewModel: MainTable.ProductSelected.ViewModel)
+  {
+    self.hideActivityIndicator()
+    self.router?.routeToDetail(segue: nil)
+  }
   
-  //@IBOutlet weak var nameTextField: UITextField!
+  func resultUpdate(viewModel: MainTable.Update.ViewModel)
+  {
+    self.hideActivityIndicator()
+    self.products = viewModel.products
+    self.tableView.reloadData()
+  }
   
-  
+  func resultCreate(viewModel: MainTable.ProductCreate.ViewModel)
+  {
+    self.hideActivityIndicator()
+    self.products = viewModel.products
+    self.tableView.reloadData()
+  }
 }
 
 // MARK: - UITableViewDelegate
@@ -133,7 +217,10 @@ extension MainTableViewController {
          selectedProduct = resultsTableController.filteredProducts[indexPath.row]
      }
      
-     self.router?.routeToDetail(segue: nil)
+     self.showActivityIndicator()
+     let request = MainTable.ProductSelected.Request(name:selectedProduct.title,count:selectedProduct.count)
+     self.interactor?.requestDetail(request: request)
+    
      tableView.deselectRow(at: indexPath, animated: false)
     }
     
@@ -145,8 +232,6 @@ extension MainTableViewController
 {
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
   {
-    
-    print(products)
     return products.count
   }
   

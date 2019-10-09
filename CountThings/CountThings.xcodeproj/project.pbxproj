@@ -181,9 +181,6 @@
 			isa = PBXGroup;
 			children = (
 				FE00B7D0234D8FF8007A55D1 /* Detail */,
-				FE00B7C1234D8B9C007A55D1 /* Cell */,
-				FE00B7BA234D8783007A55D1 /* Resullt */,
-				FE00B7B0234D8479007A55D1 /* Base */,
 				FE00B7A3234D846C007A55D1 /* Main */,
 			);
 			path = Scenes;
@@ -250,6 +247,9 @@
 		FE00B7A3234D846C007A55D1 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				FE00B7BA234D8783007A55D1 /* Resullt */,
+				FE00B7B0234D8479007A55D1 /* Base */,
+				FE00B7C1234D8B9C007A55D1 /* Cell */,
 				FE00B7A4234D846C007A55D1 /* MainTablePresenter.swift */,
 				FE00B7A5234D846C007A55D1 /* MainTableViewController.swift */,
 				FE00B7A6234D846C007A55D1 /* MainTableRouter.swift */,

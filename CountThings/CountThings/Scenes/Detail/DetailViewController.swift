@@ -10,15 +10,18 @@ import UIKit
 
 protocol DetailDisplayLogic: class
 {
+  func resultProductSelected(viewModel: Detail.Product.ViewModel)
 }
 
-class DetailViewController: UIViewController, DetailDisplayLogic
+class DetailViewController: UIViewController, DetailDisplayLogic,ActivityIndicatorPresenter
 {
   var interactor: DetailBusinessLogic?
   var router: (NSObjectProtocol & DetailRoutingLogic & DetailDataPassing)?
-
-  var product: Product!
-  @IBOutlet private weak var count: UILabel!
+  var activityIndicator = UIActivityIndicatorView()
+  
+  @IBOutlet private weak var nameLabel: UILabel!
+  @IBOutlet private weak var countLabel: UILabel!
+  
   
   // MARK: Object lifecycle
   
@@ -67,7 +70,8 @@ class DetailViewController: UIViewController, DetailDisplayLogic
   override func viewDidLoad()
   {
     super.viewDidLoad()
-
+    nameLabel.textAlignment = .left
+    countLabel.textAlignment = .left
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -76,8 +80,17 @@ class DetailViewController: UIViewController, DetailDisplayLogic
       if #available(iOS 11.0, *) {
           self.navigationItem.largeTitleDisplayMode = .never
       }
-      
-      
+    
+      self.showActivityIndicator()
+      let request = Detail.Product.Request()
+      self.interactor?.requestProductSelected(request: request)
+  }
+  
+  func resultProductSelected(viewModel: Detail.Product.ViewModel)
+  {
+    self.hideActivityIndicator()
+    nameLabel.text = "\(Constants.Messages.General.nameText) : \(viewModel.name!)"
+    countLabel.text = "\(Constants.Messages.General.countText) :\(viewModel.count!)"
   }
  
 }
