@@ -22,7 +22,8 @@ struct Constants
   {
     struct Alert
     {
-       static let OKLabel = NSLocalizedString("OK", comment: "")
+       static let okLabel = NSLocalizedString("OK", comment: "")
+       static let cancelText = NSLocalizedString("Cancelar", comment: "")
     }
     
     struct General
@@ -32,8 +33,9 @@ struct Constants
        static let nameText = NSLocalizedString("Nombre", comment: "")
        static let navText = NSLocalizedString("iOS Development Test", comment: "")
        static let createAlertText = NSLocalizedString("Favor ingrese el nombre del elemento", comment: "")
-       static let cancelText = NSLocalizedString("Cancelar", comment: "")
        static let createText = NSLocalizedString("Crear", comment: "")
+       static let deleteText = NSLocalizedString("Borrar", comment: "")
+        static let totalText = NSLocalizedString("TOTAL DE CONTADORES", comment: "")
     }
     
    

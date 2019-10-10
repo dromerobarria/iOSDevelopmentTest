@@ -10,7 +10,7 @@ import UIKit
 
 protocol DetailBusinessLogic
 {
-  func requestProductSelected(request: Detail.Product.Request)
+  func requestProductSelected(request: Detail.ProductSelected.Request)
 }
 
 protocol DetailDataStore
@@ -26,9 +26,9 @@ class DetailInteractor: DetailBusinessLogic, DetailDataStore
   var name: String?
   var count: Int?
   
-  func requestProductSelected(request: Detail.Product.Request)
+  func requestProductSelected(request: Detail.ProductSelected.Request)
   {
-    let response = Detail.Product.Response(name:name,count:count)
+    let response = Detail.ProductSelected.Response(name:name,count:count)
     self.presenter?.presentProductSelected(response: response)
   }
 }

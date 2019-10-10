@@ -10,7 +10,7 @@ import UIKit
 
 protocol DetailDisplayLogic: class
 {
-  func resultProductSelected(viewModel: Detail.Product.ViewModel)
+  func resultProductSelected(viewModel: Detail.ProductSelected.ViewModel)
 }
 
 class DetailViewController: UIViewController, DetailDisplayLogic,ActivityIndicatorPresenter
@@ -82,11 +82,11 @@ class DetailViewController: UIViewController, DetailDisplayLogic,ActivityIndicat
       }
     
       self.showActivityIndicator()
-      let request = Detail.Product.Request()
+      let request = Detail.ProductSelected.Request()
       self.interactor?.requestProductSelected(request: request)
   }
   
-  func resultProductSelected(viewModel: Detail.Product.ViewModel)
+  func resultProductSelected(viewModel: Detail.ProductSelected.ViewModel)
   {
     self.hideActivityIndicator()
     nameLabel.text = "\(Constants.Messages.General.nameText) : \(viewModel.name!)"

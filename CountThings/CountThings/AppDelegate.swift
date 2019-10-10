@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
       
       let products = [
-           Product(title: "ASD", count: 1, id: UUID().uuidString),Product(title: "FGH", count: 1, id: UUID().uuidString)]
+           Product(title: "ASD", count: 0, id: UUID().uuidString),Product(title: "FGH", count: 0, id: UUID().uuidString)]
       
       if let navController = window!.rootViewController as? UINavigationController {
 
@@ -30,6 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
+    /*
     // MARK: - UIStateRestoration
 
     func application(_ application: UIApplication, shouldSaveApplicationState coder: NSCoder) -> Bool {
@@ -38,5 +39,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, shouldRestoreApplicationState coder: NSCoder) -> Bool {
         return true
-    }
+    }*/
 }

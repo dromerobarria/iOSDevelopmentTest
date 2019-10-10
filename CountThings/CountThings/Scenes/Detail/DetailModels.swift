@@ -11,7 +11,7 @@ import UIKit
 enum Detail
 {
   // MARK: Use cases
-  enum Product
+  enum ProductSelected
   {
     struct Request
     {

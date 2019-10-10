@@ -110,13 +110,11 @@ class MainTableViewController: BaseTableViewController, MainTableDisplayLogic,Ac
     }
 
     searchController.delegate = self
-    searchController.dimsBackgroundDuringPresentation = false
     searchController.searchBar.delegate = self
     definesPresentationContext = true
     
     NotificationCenter.default.addObserver(self, selector: #selector(MainTableViewController.increaseValue), name: Notification.Name("increaseValue"), object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(MainTableViewController.decreaseValue), name: Notification.Name("decreaseValue"), object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(MainTableViewController.deleteProduct), name: Notification.Name("deleteProduct"), object: nil)
     
     
   }
@@ -135,7 +133,7 @@ class MainTableViewController: BaseTableViewController, MainTableDisplayLogic,Ac
     
     alert.addTextField()
 
-    let submitAction = UIAlertAction(title: Constants.Messages.General.createText, style: .default) { [unowned alert] _ in
+    let createAction = UIAlertAction(title: Constants.Messages.General.createText, style: .default) { [unowned alert] _ in
         let name = alert.textFields![0].text
         
         self.showActivityIndicator()
@@ -143,21 +141,12 @@ class MainTableViewController: BaseTableViewController, MainTableDisplayLogic,Ac
         self.interactor?.requestCreate(request: request)
     }
 
-    alert.addAction(submitAction)
-    alert.addAction(UIAlertAction(title: Constants.Messages.General.cancelText, style: .cancel, handler: nil))
+    let cancelAction = UIAlertAction(title: Constants.Messages.Alert.cancelText, style: .cancel, handler: nil)
     
+    alert.addAction(createAction)
+    alert.addAction(cancelAction)
+   
     self.present(alert, animated: true, completion: nil)
-  }
-  
-  @objc func deleteProduct(_ notification: NSNotification)
-  {
-    if let product = notification.userInfo?["product"] as? Product
-    {
-      self.showActivityIndicator()
-      let request = MainTable.Update.Request(products: products,product:product)
-      self.interactor?.requestDelete(request: request)
-    }
-    
   }
   
   @objc func increaseValue(_ notification: NSNotification)
@@ -222,14 +211,67 @@ extension MainTableViewController {
      self.interactor?.requestDetail(request: request)
     
      tableView.deselectRow(at: indexPath, animated: false)
-    }
+  }
+  
+  override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool
+  {
+      return true
+  }
     
+  override func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String?
+  {
+    return Constants.Messages.General.deleteText
+  }
+  
+  override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath)
+  {
+      if editingStyle == .delete
+      {
+          let cell = tableView.cellForRow(at: indexPath) as! ProductCell
+          self.showActivityIndicator()
+          let request = MainTable.Update.Request(products: self.products,product:cell.product!)
+          self.interactor?.requestDelete(request: request)
+      }
+  }
 }
+
 
 // MARK: - UITableViewDataSource
 
 extension MainTableViewController
 {
+  
+  override func numberOfSections(in tableView: UITableView) -> Int
+  {
+    return 1
+  }
+  
+  override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+      return 40
+  }
+  
+  override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    
+    let headerView = UIView(frame: CGRect(x:0, y:0, width:tableView.frame.size.width, height:40))
+    headerView.backgroundColor = UIColor.clear
+    
+    let label = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 40))
+    label.textAlignment = .center
+    
+    label.text = "\(Constants.Messages.General.totalText): \(sumCount(products: products))"
+    
+    let stackView   = UIStackView()
+    stackView.axis  = NSLayoutConstraint.Axis.horizontal
+    stackView.distribution  = UIStackView.Distribution.fillEqually
+    stackView.alignment = UIStackView.Alignment.center
+    stackView.addArrangedSubview(label)
+    stackView.translatesAutoresizingMaskIntoConstraints = false
+    headerView.addSubview(stackView)
+    stackView.leadingAnchor.constraint(equalTo: headerView.leadingAnchor).isActive = true
+    stackView.trailingAnchor.constraint(equalTo: headerView.trailingAnchor).isActive = true
+    return headerView
+  }
+  
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
   {
     return products.count
@@ -240,10 +282,9 @@ extension MainTableViewController
     let cell = tableView.dequeueReusableCell(withIdentifier: BaseTableViewController.tableViewCellIdentifier, for: indexPath) as! ProductCell
     
     let product = products[indexPath.row]
-    configureCell(cell, forProduct: product)
+    configureCell(cell, forProduct: product,enable:true)
     return cell
   }
-  
 }
 
 // MARK: - UISearchBarDelegate

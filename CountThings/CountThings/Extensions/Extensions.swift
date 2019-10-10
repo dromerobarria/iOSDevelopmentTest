@@ -28,7 +28,7 @@ extension UIViewController
     let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
     alertController.setValue(titleMutableString, forKey: "attributedTitle")
     alertController.setValue(messageMutableString, forKey: "attributedMessage")
-    let OKAction = UIAlertAction(title: Constants.Messages.Alert.OKLabel, style: .default, handler: nil)
+    let OKAction = UIAlertAction(title: Constants.Messages.Alert.okLabel, style: .default, handler: nil)
     alertController.addAction(OKAction)
     self.present(alertController, animated: true, completion: nil)
   }

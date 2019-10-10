@@ -15,8 +15,19 @@ class ResultsTableController: BaseTableViewController
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: BaseTableViewController.tableViewCellIdentifier, for: indexPath) as! ProductCell
         let product = filteredProducts[indexPath.row]
-        configureCell(cell, forProduct: product)
-        
+        configureCell(cell, forProduct: product,enable:false)
+     
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String?
+     {
+       return Constants.Messages.General.deleteText
+     }
+     
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool
+    {
+        return false
+    }
+  
 }
