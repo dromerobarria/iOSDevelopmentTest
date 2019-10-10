@@ -36,6 +36,7 @@ struct Constants
        static let deleteText = NSLocalizedString("Borrar", comment: "")
        static let totalText = NSLocalizedString("TOTAL DE CONTADORES", comment: "")
        static let repeatText = NSLocalizedString("Lo sentimos ya existe un producto con ese nombre.", comment: "")
+       static let searchCancelText = NSLocalizedString("Cancelar", comment: "")
     }
     
     struct Api {
