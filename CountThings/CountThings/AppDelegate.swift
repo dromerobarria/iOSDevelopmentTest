@@ -17,7 +17,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
       
-    
+        /*
+        var products = [
+                 Product(title: "ASD", count: 0, id: UUID().uuidString),Product(title: "FGH", count: 0, id: UUID().uuidString)]
+          */
 
         return true
     }

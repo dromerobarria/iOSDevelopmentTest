@@ -38,11 +38,14 @@ enum MainTable
      
     struct Response
     {
+      var isError : Bool
+      var message : String
       let products : [Product]
     }
     
     struct ViewModel
     {
+      var message : String
       let products : [Product]
     }
   }
@@ -57,11 +60,14 @@ enum MainTable
     
     struct Response
     {
+      var isError : Bool
+      var message : String
       let products : [Product]
     }
    
     struct ViewModel
     {
+      var message : String
       let products : [Product]
     }
   }

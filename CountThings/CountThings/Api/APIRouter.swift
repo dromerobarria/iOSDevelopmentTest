@@ -12,9 +12,16 @@ import Alamofire
 enum APIRouter: URLRequestConvertible
 {
   
-  //App
+  /// Get Counters
   case allCounters
-  
+  /// Increase Counter
+  case increaseCounter(parameters: [String: AnyObject])
+  /// Descrease Counter
+  case decreaseCounter(parameters: [String: AnyObject])
+  /// Delete Counter
+  case deleteCounter(parameters: [String: AnyObject])
+  /// Create Counter
+  case createCounter(parameters: [String: AnyObject])
   
   // MARK: - HTTPMethod
   private var method: HTTPMethod
@@ -23,6 +30,14 @@ enum APIRouter: URLRequestConvertible
     {
     case .allCounters:
       return .get
+    case .increaseCounter:
+      return .post
+    case .decreaseCounter:
+      return .post
+    case .deleteCounter:
+      return .delete
+    case .createCounter:
+      return .post
     }
   }
   
@@ -33,6 +48,14 @@ enum APIRouter: URLRequestConvertible
     {
     case .allCounters:
       return "counters"
+    case .increaseCounter(_):
+      return "counter/inc"
+    case .decreaseCounter(_):
+      return "counter/dec"
+    case .deleteCounter(_):
+      return "counter"
+    case .createCounter(_):
+      return "counter"
     }
   }
   
@@ -43,6 +66,14 @@ enum APIRouter: URLRequestConvertible
     {
     case .allCounters:
       return nil
+    case .increaseCounter(let parameters):
+      return parameters
+    case .decreaseCounter(let parameters):
+      return parameters
+    case .deleteCounter(let parameters):
+      return parameters
+    case .createCounter(let parameters):
+      return parameters
     }
   }
   
@@ -65,7 +96,7 @@ enum APIRouter: URLRequestConvertible
     urlRequest.setValue(ContentType.json.rawValue, forHTTPHeaderField: HTTPHeaderField.acceptType.rawValue)
     urlRequest.setValue(ContentType.json.rawValue, forHTTPHeaderField: HTTPHeaderField.contentType.rawValue)
     
-    print("UrlRequest : \(urlRequest)")
+    //print("UrlRequest : \(urlRequest)")
     
     // Parameters
     if let parameters = parameters

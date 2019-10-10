@@ -10,8 +10,10 @@ import UIKit
 protocol MainTableDisplayLogic: class
 {
   func resultDetail(viewModel: MainTable.ProductSelected.ViewModel)
-  func resultUpdate(viewModel: MainTable.Update.ViewModel)
-  func resultCreate(viewModel: MainTable.ProductCreate.ViewModel)
+  func successUpdate(viewModel: MainTable.Update.ViewModel)
+  func errorUpdate(viewModel: MainTable.Update.ViewModel)
+  func successCreate(viewModel: MainTable.ProductCreate.ViewModel)
+  func errorCreate(viewModel: MainTable.ProductCreate.ViewModel)
   func errorCounters(viewModel: MainTable.CountersRequest.ViewModel)
   func successCounters(viewModel: MainTable.CountersRequest.ViewModel)
   
@@ -37,8 +39,6 @@ class MainTableViewController: BaseTableViewController, MainTableDisplayLogic,Ac
   }
   
   var activityIndicator = UIActivityIndicatorView()
-  
-  
   
   /// Data model for the table view.
   var products = [Product]()
@@ -97,19 +97,9 @@ class MainTableViewController: BaseTableViewController, MainTableDisplayLogic,Ac
   
   override func viewDidLoad()
   {
-    
-    
     super.viewDidLoad()
     configureNavegationBar()
-    
-    if #available(iOS 10.0, *) {
-      let refreshControl = UIRefreshControl()
-      refreshControl.addTarget(self,
-                               action: #selector(refreshOptions(sender:)),
-                               for: .valueChanged)
-      tableView.refreshControl = refreshControl
-    }
-    
+   
     resultsTableController = ResultsTableController()
 
     resultsTableController.tableView.delegate = self
@@ -143,13 +133,6 @@ class MainTableViewController: BaseTableViewController, MainTableDisplayLogic,Ac
     title = Constants.Messages.General.navText
     let add = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(MainTableViewController.addTapped))
     navigationItem.rightBarButtonItems = [add]
-  }
-
-  @objc private func refreshOptions(sender: UIRefreshControl) {
-     self.showActivityIndicator()
-     let request = MainTable.CountersRequest.Request()
-     self.interactor?.requestCounters(request: request)
-     sender.endRefreshing()
   }
   
   @objc func addTapped(_ sender: UIBarButtonItem)
@@ -201,25 +184,46 @@ class MainTableViewController: BaseTableViewController, MainTableDisplayLogic,Ac
     self.router?.routeToDetail(segue: nil)
   }
   
-  func resultUpdate(viewModel: MainTable.Update.ViewModel)
+  func successUpdate(viewModel: MainTable.Update.ViewModel)
   {
     self.hideActivityIndicator()
     self.products = viewModel.products
     self.tableView.reloadData()
   }
   
-  func resultCreate(viewModel: MainTable.ProductCreate.ViewModel)
+  func errorUpdate(viewModel: MainTable.Update.ViewModel)
+  {
+    self.hideActivityIndicator()
+    self.alert(message: viewModel.message)
+  }
+  
+  
+  func successCreate(viewModel: MainTable.ProductCreate.ViewModel)
   {
     self.hideActivityIndicator()
     self.products = viewModel.products
     self.tableView.reloadData()
   }
   
+  func errorCreate(viewModel: MainTable.ProductCreate.ViewModel)
+  {
+    self.hideActivityIndicator()
+    self.alert(message: viewModel.message)
+  }
   
   func errorCounters(viewModel: MainTable.CountersRequest.ViewModel)
   {
     self.hideActivityIndicator()
-    self.alert(message: viewModel.message)
+    let alert = UIAlertController(title: Constants.Messages.General.navText, message: viewModel.message, preferredStyle: .alert)
+     
+    let refreshAction = UIAlertAction(title: Constants.Messages.Api.refreshText, style: .default, handler: { (action) in
+        self.showActivityIndicator()
+        let request = MainTable.CountersRequest.Request()
+        self.interactor?.requestCounters(request: request)
+    })
+    
+    alert.addAction(refreshAction)
+    self.present(alert, animated: true, completion: nil)
   }
   
   func successCounters(viewModel: MainTable.CountersRequest.ViewModel)
