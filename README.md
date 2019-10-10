@@ -59,3 +59,16 @@ DELETE { id: "qwer" } /api/v1/counter [ { id: "asdf", title: "Coffee", count: 1 
 GET /api/v1/counters [ { id: "asdf", title: "Coffee", count: 1 }, ] ```
 
 NOTE: Each request returns the current state of all counters.
+
+
+# Consideraciones
+
+Para la implementación de la network layer se utilizo Alamofire.
+
+En Constans se puede encontrar la URL (en "testUrl") para modificar en caso de probar hacia otra direccón , actualmente es http://localhost:3000.
+
+Se utilizo la arquitectura Clean Swift , utilizando sus templates junto a la documentación de Apple (en el caso de la searchBar, la cual solo tiene la funcionalidad de buscar y no editar sus elementos).
+
+TODO ASAP.
+
+Realizar algunas pruebas XCTests
