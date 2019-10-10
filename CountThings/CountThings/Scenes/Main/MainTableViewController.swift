@@ -12,6 +12,9 @@ protocol MainTableDisplayLogic: class
   func resultDetail(viewModel: MainTable.ProductSelected.ViewModel)
   func resultUpdate(viewModel: MainTable.Update.ViewModel)
   func resultCreate(viewModel: MainTable.ProductCreate.ViewModel)
+  func errorCounters(viewModel: MainTable.CountersRequest.ViewModel)
+  func successCounters(viewModel: MainTable.CountersRequest.ViewModel)
+  
 }
 
 class MainTableViewController: BaseTableViewController, MainTableDisplayLogic,ActivityIndicatorPresenter
@@ -35,6 +38,8 @@ class MainTableViewController: BaseTableViewController, MainTableDisplayLogic,Ac
   
   var activityIndicator = UIActivityIndicatorView()
   
+  
+  
   /// Data model for the table view.
   var products = [Product]()
   
@@ -46,6 +51,7 @@ class MainTableViewController: BaseTableViewController, MainTableDisplayLogic,Ac
    
   /// Restoration state for UISearchController
   private var restoredState = SearchControllerRestorableState()
+  
   
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
   {
@@ -91,8 +97,18 @@ class MainTableViewController: BaseTableViewController, MainTableDisplayLogic,Ac
   
   override func viewDidLoad()
   {
+    
+    
     super.viewDidLoad()
     configureNavegationBar()
+    
+    if #available(iOS 10.0, *) {
+      let refreshControl = UIRefreshControl()
+      refreshControl.addTarget(self,
+                               action: #selector(refreshOptions(sender:)),
+                               for: .valueChanged)
+      tableView.refreshControl = refreshControl
+    }
     
     resultsTableController = ResultsTableController()
 
@@ -116,6 +132,9 @@ class MainTableViewController: BaseTableViewController, MainTableDisplayLogic,Ac
     NotificationCenter.default.addObserver(self, selector: #selector(MainTableViewController.increaseValue), name: Notification.Name("increaseValue"), object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(MainTableViewController.decreaseValue), name: Notification.Name("decreaseValue"), object: nil)
     
+    self.showActivityIndicator()
+    let request = MainTable.CountersRequest.Request()
+    self.interactor?.requestCounters(request: request)
     
   }
   
@@ -125,7 +144,13 @@ class MainTableViewController: BaseTableViewController, MainTableDisplayLogic,Ac
     let add = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(MainTableViewController.addTapped))
     navigationItem.rightBarButtonItems = [add]
   }
-  
+
+  @objc private func refreshOptions(sender: UIRefreshControl) {
+     self.showActivityIndicator()
+     let request = MainTable.CountersRequest.Request()
+     self.interactor?.requestCounters(request: request)
+     sender.endRefreshing()
+  }
   
   @objc func addTapped(_ sender: UIBarButtonItem)
   {
@@ -189,6 +214,21 @@ class MainTableViewController: BaseTableViewController, MainTableDisplayLogic,Ac
     self.products = viewModel.products
     self.tableView.reloadData()
   }
+  
+  
+  func errorCounters(viewModel: MainTable.CountersRequest.ViewModel)
+  {
+    self.hideActivityIndicator()
+    self.alert(message: viewModel.message)
+  }
+  
+  func successCounters(viewModel: MainTable.CountersRequest.ViewModel)
+  {
+    self.hideActivityIndicator()
+    self.products = viewModel.products
+    self.tableView.reloadData()
+  }
+  
 }
 
 // MARK: - UITableViewDelegate

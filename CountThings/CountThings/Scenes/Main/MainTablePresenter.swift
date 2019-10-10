@@ -15,6 +15,7 @@ protocol MainTablePresentationLogic
   func presentDecrease(response: MainTable.Update.Response)
   func presentDelete(response: MainTable.Update.Response)
   func presentCreate(response: MainTable.ProductCreate.Response)
+  func fetchCounters(response: MainTable.CountersRequest.Response)
 }
 
 class MainTablePresenter: MainTablePresentationLogic
@@ -53,5 +54,21 @@ class MainTablePresenter: MainTablePresentationLogic
     let products = response.products
     let viewModel = MainTable.ProductCreate.ViewModel(products: products)
     viewController?.resultCreate(viewModel: viewModel)
+  }
+  
+  func fetchCounters(response: MainTable.CountersRequest.Response)
+  {
+    let isError = response.isError
+    let message = response.message
+    let counters = response.products
+    
+    switch isError {
+    case true:
+      let viewModel = MainTable.CountersRequest.ViewModel(products:counters,message: message)
+      viewController?.errorCounters(viewModel: viewModel)
+    default:
+      let viewModel = MainTable.CountersRequest.ViewModel(products:counters,message: message)
+      viewController?.successCounters(viewModel: viewModel)
+    }
   }
 }

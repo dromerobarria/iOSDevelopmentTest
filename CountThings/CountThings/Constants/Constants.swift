@@ -38,7 +38,9 @@ struct Constants
         static let totalText = NSLocalizedString("TOTAL DE CONTADORES", comment: "")
     }
     
-   
+    struct Api {
+      static let internetText = NSLocalizedString("Sin conexión a Internet", comment: "")
+    }
   }
 }
 
