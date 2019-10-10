@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 
-
 struct Constants
 {
   struct Sizes {
@@ -22,15 +21,28 @@ struct Constants
   {
     struct Alert
     {
-       static let OKLabel = NSLocalizedString("OK", comment: "")
+       static let okLabel = NSLocalizedString("OK", comment: "")
+       static let cancelText = NSLocalizedString("Cancelar", comment: "")
     }
     
     struct General
     {
-       static let titleLabel = NSLocalizedString("CountThings", comment: "")
+       static let titleText = NSLocalizedString("CountThings", comment: "")
+       static let countText = NSLocalizedString("Total", comment: "")
+       static let nameText = NSLocalizedString("Nombre", comment: "")
+       static let navText = NSLocalizedString("iOS Development Test", comment: "")
+       static let createAlertText = NSLocalizedString("Favor ingrese el nombre del elemento", comment: "")
+       static let createText = NSLocalizedString("Crear", comment: "")
+       static let deleteText = NSLocalizedString("Borrar", comment: "")
+       static let totalText = NSLocalizedString("TOTAL DE CONTADORES", comment: "")
+       static let repeatText = NSLocalizedString("Lo sentimos ya existe un producto con ese nombre.", comment: "")
     }
     
-   
+    struct Api {
+      static let internetText = NSLocalizedString("Sin conexión a Internet.", comment: "")
+      static let serverErrorText = NSLocalizedString("Lo sentimos ha ocurrido un error.", comment: "")
+      static let refreshText = NSLocalizedString("Reintentar", comment: "")
+    }
   }
 }
 
@@ -39,7 +51,8 @@ struct Api
 {
   struct Server
   {
-    //True Development // False Production
+    ///True Development
+    ///False Production
     static let debugURL = true
 
     static let baseURL = "http://localhost:3000" // Production

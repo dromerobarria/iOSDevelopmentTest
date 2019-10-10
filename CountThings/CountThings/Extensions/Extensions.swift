@@ -28,7 +28,7 @@ extension UIViewController
     let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
     alertController.setValue(titleMutableString, forKey: "attributedTitle")
     alertController.setValue(messageMutableString, forKey: "attributedMessage")
-    let OKAction = UIAlertAction(title: Constants.Messages.Alert.OKLabel, style: .default, handler: nil)
+    let OKAction = UIAlertAction(title: Constants.Messages.Alert.okLabel, style: .default, handler: nil)
     alertController.addAction(OKAction)
     self.present(alertController, animated: true, completion: nil)
   }
@@ -58,8 +58,13 @@ public extension ActivityIndicatorPresenter where Self: UIViewController
     
     DispatchQueue.main.async
       {
-      
-        self.activityIndicator.style = .large
+        
+        if #available(iOS 13.0, *) {
+              self.activityIndicator.style = .large
+        } else {
+              self.activityIndicator.style = .gray
+        }
+        
         self.activityIndicator.frame = CGRect(x: 0, y: 0, width: 80, height: 80)
         self.activityIndicator.backgroundColor = UIColor(red:0.16, green:0.17, blue:0.21, alpha:1)
         self.activityIndicator.layer.cornerRadius = 6
