@@ -1,4 +1,9 @@
-
+//
+//  BaseTableViewController.swift
+//  CountThings
+//
+//  Created by Danie Romero on 10/9/19.
+//  Copyright (c) 2019 Dromero. All rights reserved.
 
 import UIKit
 
@@ -25,7 +30,7 @@ class BaseTableViewController: UITableViewController
     }
     
     // MARK: - Configuration
-  func configureCell(_ cell: ProductCell, forProduct product: Product,enable:Bool)
+    func configureCell(_ cell: ProductCell, forProduct product: Product,enable:Bool)
     {
       cell.enable = enable
       cell.product = product

@@ -10,6 +10,7 @@ import UIKit
 
 protocol DetailBusinessLogic
 {
+  /// Request product selected
   func requestProductSelected(request: Detail.ProductSelected.Request)
 }
 
