@@ -107,7 +107,7 @@ class MainTableViewController: BaseTableViewController, MainTableDisplayLogic,Ac
     searchController = UISearchController(searchResultsController: resultsTableController)
     searchController.searchResultsUpdater = self
     searchController.searchBar.autocapitalizationType = .none
-    
+  searchController.searchBar.setValue(Constants.Messages.General.searchCancelText, forKey: "cancelButtonText")
     if #available(iOS 11.0, *) {
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
