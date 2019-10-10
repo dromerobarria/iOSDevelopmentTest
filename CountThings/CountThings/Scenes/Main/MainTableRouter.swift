@@ -48,5 +48,7 @@ class MainTableRouter: NSObject, MainTableRoutingLogic, MainTableDataPassing
  
   func passDataToDetail(source: MainTableDataStore, destination: inout DetailDataStore)
    {
+      destination.name = source.name
+      destination.count = source.count
    }
 }

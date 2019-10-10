@@ -21,12 +21,13 @@ class BaseTableViewController: UITableViewController
         super.viewDidLoad()
         let nib = UINib(nibName: BaseTableViewController.nibName, bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: BaseTableViewController.tableViewCellIdentifier)
+        tableView.tableFooterView = UIView()
     }
     
     // MARK: - Configuration
-    
-    func configureCell(_ cell: ProductCell, forProduct product: Product)
+  func configureCell(_ cell: ProductCell, forProduct product: Product,enable:Bool)
     {
+      cell.enable = enable
       cell.product = product
     }
 }
