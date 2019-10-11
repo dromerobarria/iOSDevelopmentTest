@@ -8,7 +8,11 @@ Se utilizo la arquitectura Clean Swift , utilizando sus templates junto a la doc
 
 TODO ASAP.
 
-Realizar algunas pruebas XCTests
+XCTest:
+func testNumberOfSectionsInTableViewShouldAlwaysBeOne()
+func testPresentFetchedProductsShouldAskViewControllerToDisplayFetchedProducts()
+func testNumberOfRowsInAnySectionShouldEqaulNumberOfProductsToDisplay()
+
 
 # iOSDevelopmentTest
 Cornershop iOS Development Test
