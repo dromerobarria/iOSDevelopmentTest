@@ -89,16 +89,16 @@ enum APIRouter: URLRequestConvertible
     url = URL(string: urlString + Api.Server.version)!
     urlRequest = URLRequest(url: url!.appendingPathComponent(path))
     
-    // HTTP Method
+    /// HTTP Method
     urlRequest.httpMethod = method.rawValue
     
-    // Common Headers
+    /// Common Headers
     urlRequest.setValue(ContentType.json.rawValue, forHTTPHeaderField: HTTPHeaderField.acceptType.rawValue)
     urlRequest.setValue(ContentType.json.rawValue, forHTTPHeaderField: HTTPHeaderField.contentType.rawValue)
     
     //print("UrlRequest : \(urlRequest)")
     
-    // Parameters
+    /// Parameters
     if let parameters = parameters
     {
       do

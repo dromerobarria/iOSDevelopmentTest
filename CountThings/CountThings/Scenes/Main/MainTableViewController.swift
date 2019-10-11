@@ -100,6 +100,7 @@ class MainTableViewController: BaseTableViewController, MainTableDisplayLogic,Ac
     super.viewDidLoad()
     configureNavegationBar()
    
+    tableView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
     resultsTableController = ResultsTableController()
 
     resultsTableController.tableView.delegate = self
@@ -107,7 +108,7 @@ class MainTableViewController: BaseTableViewController, MainTableDisplayLogic,Ac
     searchController = UISearchController(searchResultsController: resultsTableController)
     searchController.searchResultsUpdater = self
     searchController.searchBar.autocapitalizationType = .none
-  searchController.searchBar.setValue(Constants.Messages.General.searchCancelText, forKey: "cancelButtonText")
+    searchController.searchBar.setValue(Constants.Messages.General.searchCancelText, forKey: "cancelButtonText")
     if #available(iOS 11.0, *) {
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
@@ -128,6 +129,8 @@ class MainTableViewController: BaseTableViewController, MainTableDisplayLogic,Ac
     
   }
   
+  
+  /// NavigationBar
   func configureNavegationBar()
   {
     title = Constants.Messages.General.navText
@@ -157,6 +160,7 @@ class MainTableViewController: BaseTableViewController, MainTableDisplayLogic,Ac
     self.present(alert, animated: true, completion: nil)
   }
   
+  /// Observers
   @objc func increaseValue(_ notification: NSNotification)
   {
     if let product = notification.userInfo?["product"] as? Product
@@ -196,7 +200,6 @@ class MainTableViewController: BaseTableViewController, MainTableDisplayLogic,Ac
     self.hideActivityIndicator()
     self.alert(message: viewModel.message)
   }
-  
   
   func successCreate(viewModel: MainTable.ProductCreate.ViewModel)
   {

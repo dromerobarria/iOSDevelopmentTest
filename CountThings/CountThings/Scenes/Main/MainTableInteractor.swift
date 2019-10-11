@@ -10,11 +10,17 @@ import UIKit
 
 protocol MainTableBusinessLogic
 {
+  /// Request detail product
   func requestDetail(request: MainTable.ProductSelected.Request)
+  /// Request increase product
   func requestIncrease(request: MainTable.Update.Request)
+  /// Request decrease product
   func requestDecrease(request: MainTable.Update.Request)
+  /// Request delete product
   func requestDelete(request: MainTable.Update.Request)
+  /// Request create product
   func requestCreate(request: MainTable.ProductCreate.Request)
+  /// Request counters as products
   func requestCounters(request: MainTable.CountersRequest.Request)
 }
 
@@ -175,6 +181,7 @@ class MainTableInteractor: MainTableBusinessLogic, MainTableDataStore
     
     let filtered = products.filter{ $0.title.contains(String(name!)) }
     
+    /// The product already exists with same name
     if filtered.count > 0
     {
       let response = MainTable.ProductCreate.Response(isError: true, message: Constants.Messages.General.repeatText, products: products)

@@ -17,6 +17,7 @@ struct Constants
     static let large:Float = 22.0
   }
   
+  /// Messages used in the App.
   struct Messages
   {
     struct Alert
@@ -47,7 +48,7 @@ struct Constants
   }
 }
 
-
+/// Constants used in Api calls.
 struct Api
 {
   struct Server
@@ -56,6 +57,7 @@ struct Api
     ///False Production
     static let debugURL = true
 
+    /// URL base.
     static let baseURL = "http://localhost:3000" // Production
     static let testUrl = "http://localhost:3000" // Developer
     static let version = "/api/v1/"
