@@ -107,7 +107,7 @@ class MainTableViewController: BaseTableViewController, MainTableDisplayLogic,Ac
     searchController = UISearchController(searchResultsController: resultsTableController)
     searchController.searchResultsUpdater = self
     searchController.searchBar.autocapitalizationType = .none
-    
+  searchController.searchBar.setValue(Constants.Messages.General.searchCancelText, forKey: "cancelButtonText")
     if #available(iOS 11.0, *) {
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
@@ -310,6 +310,8 @@ extension MainTableViewController
     stackView.alignment = UIStackView.Alignment.center
     stackView.addArrangedSubview(label)
     stackView.translatesAutoresizingMaskIntoConstraints = false
+   
+    
     headerView.addSubview(stackView)
     stackView.leadingAnchor.constraint(equalTo: headerView.leadingAnchor).isActive = true
     stackView.trailingAnchor.constraint(equalTo: headerView.trailingAnchor).isActive = true
