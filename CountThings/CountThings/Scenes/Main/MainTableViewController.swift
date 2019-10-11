@@ -310,6 +310,8 @@ extension MainTableViewController
     stackView.alignment = UIStackView.Alignment.center
     stackView.addArrangedSubview(label)
     stackView.translatesAutoresizingMaskIntoConstraints = false
+   
+    
     headerView.addSubview(stackView)
     stackView.leadingAnchor.constraint(equalTo: headerView.leadingAnchor).isActive = true
     stackView.trailingAnchor.constraint(equalTo: headerView.trailingAnchor).isActive = true
