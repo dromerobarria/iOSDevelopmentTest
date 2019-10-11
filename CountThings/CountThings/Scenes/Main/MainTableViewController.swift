@@ -100,7 +100,6 @@ class MainTableViewController: BaseTableViewController, MainTableDisplayLogic,Ac
     super.viewDidLoad()
     configureNavegationBar()
    
-    tableView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
     resultsTableController = ResultsTableController()
 
     resultsTableController.tableView.delegate = self
@@ -316,6 +315,7 @@ extension MainTableViewController
    
     
     headerView.addSubview(stackView)
+    stackView.centerYAnchor.constraint(equalTo: headerView.centerYAnchor).isActive = true
     stackView.leadingAnchor.constraint(equalTo: headerView.leadingAnchor).isActive = true
     stackView.trailingAnchor.constraint(equalTo: headerView.trailingAnchor).isActive = true
     return headerView

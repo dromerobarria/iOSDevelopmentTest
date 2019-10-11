@@ -96,7 +96,7 @@ enum APIRouter: URLRequestConvertible
     urlRequest.setValue(ContentType.json.rawValue, forHTTPHeaderField: HTTPHeaderField.acceptType.rawValue)
     urlRequest.setValue(ContentType.json.rawValue, forHTTPHeaderField: HTTPHeaderField.contentType.rawValue)
     
-    //print("UrlRequest : \(urlRequest)")
+    print("UrlRequest : \(urlRequest)")
     
     /// Parameters
     if let parameters = parameters

@@ -27,7 +27,7 @@ class BaseTableViewController: UITableViewController
         let nib = UINib(nibName: BaseTableViewController.nibName, bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: BaseTableViewController.tableViewCellIdentifier)
         tableView.tableFooterView = UIView()
-        tableView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
+        
     }
     
     // MARK: - Configuration
