@@ -9,8 +9,11 @@ Se utilizo la arquitectura Clean Swift , utilizando sus templates junto a la doc
 TODO ASAP.
 
 XCTest:
+
 func testNumberOfSectionsInTableViewShouldAlwaysBeOne()
+
 func testPresentFetchedProductsShouldAskViewControllerToDisplayFetchedProducts()
+
 func testNumberOfRowsInAnySectionShouldEqaulNumberOfProductsToDisplay()
 
 
