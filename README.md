@@ -1,3 +1,30 @@
+
+# Roadmap
+- No funciona offline / No tiene persistencia de datos * Solo funciona conectada a internet.
+
+Solución: Se genera base de datos (Realm) para persistencia de datos, falta por resolver cambios en offline ya que no existe endpoint para actualizar cambios en general solo de a uno.
+
+TODO
+Permitir modificaciones offline y luego actualziar en server.
+
+
+# Respuesta
+
+✅ Aspectos positivos
+👍 Uso de arquitectura clean/viper para el código. * En general ayuda a mantener el código solo con responsabilidades asociadas.
+👍 Localization (traducciones) * Tiene una base de traducciones.
+👍 Manejo de errores user friendly * Cuando la app no tiene conexión se muestra info al usuario del problema de una manera correcta.
+👍 Soporta dispositivos de manera universal * Funciona en iPhone y iPad
+
+🙅‍♂️ Aspectos negativos
+👎 No funciona offline / No tiene persistencia de datos * Solo funciona conectada a internet.
+👎 Bad UI/UX * La UI busca ser simple (que no está mal) pero en este caso está descuidada, solo se usaron componentes nativos sin cuidar aspectos de alineación y en general parece un "ejemplo" de app mas que una app "Lista para la App Store".
+👎 Código sin usar * Hay demasiadas partes del código que están creadas pero con implementación vacía como si se necesitasen para algo que nunca ocurrió y quedaron muchos archivos que no deberían estar que no hacen nada.
+👎 Tests de unidad * Esto no es algo malo!, pero la implementación no es correcta, busca realizar test que permitan testear la aplicación pero no aseguran el funcionamiento dado que implementa algunos casos. Adicionalmente la cantidad de código embebido en el ambito de los tests para crear mocks lo hace desordenado.
+
+
+
+
 # Consideraciones
 
 Para la implementación de la network layer se utilizo Alamofire.
@@ -5,8 +32,6 @@ Para la implementación de la network layer se utilizo Alamofire.
 En Constans se puede encontrar la URL (en "testUrl") para modificar en caso de probar hacia otra dirección , actualmente es http://localhost:3000.
 
 Se utilizo la arquitectura Clean Swift , utilizando sus templates junto a la documentación de Apple (en el caso de la searchBar, la cual solo tiene la funcionalidad de buscar y no editar sus elementos).
-
-TODO ASAP.
 
 XCTest:
 
