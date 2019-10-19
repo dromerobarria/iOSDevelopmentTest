@@ -44,6 +44,7 @@ struct Constants
       static let internetText = NSLocalizedString("Sin conexión a Internet.", comment: "")
       static let serverErrorText = NSLocalizedString("Lo sentimos ha ocurrido un error.", comment: "")
       static let refreshText = NSLocalizedString("Reintentar", comment: "")
+      static let cancelText = NSLocalizedString("No", comment: "")
     }
   }
 }
@@ -66,6 +67,7 @@ struct Api
 
 struct Config
 {
+  static var local = true
   static var versionApp = "v1.0.0"
   static var versionDevApp = "v1.0.0 Dev."
 }

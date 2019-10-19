@@ -7,6 +7,7 @@
 
 
 import UIKit
+import RealmSwift
 
 enum MainTable
 {
@@ -32,7 +33,6 @@ enum MainTable
   {
     struct Request
     {
-      let products : [Product]
       let product : Product
     }
      
@@ -40,13 +40,13 @@ enum MainTable
     {
       var isError : Bool
       var message : String
-      let products : [Product]
+      let products : Results<Product>
     }
     
     struct ViewModel
     {
       var message : String
-      let products : [Product]
+      let products : Results<Product>
     }
   }
   
@@ -54,7 +54,6 @@ enum MainTable
   {
     struct Request
     {
-      let products : [Product]
       var name: String?
     }
     
@@ -62,13 +61,13 @@ enum MainTable
     {
       var isError : Bool
       var message : String
-      let products : [Product]
+      let products : Results<Product>
     }
    
     struct ViewModel
     {
       var message : String
-      let products : [Product]
+      let products : Results<Product>
     }
   }
   
@@ -80,14 +79,14 @@ enum MainTable
      
      struct Response
      {
-       var products : [Product]
+       var products : Results<Product>
        var isError : Bool
        var message : String
      }
     
      struct ViewModel
      {
-       var products : [Product]
+       var products : Results<Product>
        var message : String
      }
    }

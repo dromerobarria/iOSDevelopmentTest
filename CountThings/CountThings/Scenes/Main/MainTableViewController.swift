@@ -6,6 +6,7 @@
 //  Copyright (c) 2019 Dromero. All rights reserved.
 
 import UIKit
+import RealmSwift
 
 protocol MainTableDisplayLogic: class
 {
@@ -41,7 +42,7 @@ class MainTableViewController: BaseTableViewController, MainTableDisplayLogic,Ac
   var activityIndicator = UIActivityIndicatorView()
   
   /// Data model for the table view.
-  var products = [Product]()
+  var products = Product.all()
   
   /// Search controller to help us with filtering.
   private var searchController: UISearchController!
@@ -121,11 +122,14 @@ class MainTableViewController: BaseTableViewController, MainTableDisplayLogic,Ac
     
     NotificationCenter.default.addObserver(self, selector: #selector(MainTableViewController.increaseValue), name: Notification.Name("increaseValue"), object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(MainTableViewController.decreaseValue), name: Notification.Name("decreaseValue"), object: nil)
-    
-    self.showActivityIndicator()
-    let request = MainTable.CountersRequest.Request()
-    self.interactor?.requestCounters(request: request)
-    
+   
+    if Connectivity.isConnectedToInternet
+    {
+      self.showActivityIndicator()
+      let request = MainTable.CountersRequest.Request()
+      self.interactor?.requestCounters(request: request)
+    }
+   
   }
   
   
@@ -147,7 +151,7 @@ class MainTableViewController: BaseTableViewController, MainTableDisplayLogic,Ac
         let name = alert.textFields![0].text
         
         self.showActivityIndicator()
-        let request = MainTable.ProductCreate.Request(products: self.products,name:name)
+        let request = MainTable.ProductCreate.Request(name:name)
         self.interactor?.requestCreate(request: request)
     }
 
@@ -165,7 +169,7 @@ class MainTableViewController: BaseTableViewController, MainTableDisplayLogic,Ac
     if let product = notification.userInfo?["product"] as? Product
     {
       self.showActivityIndicator()
-      let request = MainTable.Update.Request(products: products,product:product)
+      let request = MainTable.Update.Request(product:product)
       self.interactor?.requestIncrease(request: request)
     }
   }
@@ -175,7 +179,7 @@ class MainTableViewController: BaseTableViewController, MainTableDisplayLogic,Ac
     if let product = notification.userInfo?["product"] as? Product
     {
       self.showActivityIndicator()
-      let request = MainTable.Update.Request(products: products,product:product)
+      let request = MainTable.Update.Request(product:product)
       self.interactor?.requestDecrease(request: request)
     }
   }
@@ -224,7 +228,11 @@ class MainTableViewController: BaseTableViewController, MainTableDisplayLogic,Ac
         self.interactor?.requestCounters(request: request)
     })
     
+    let cancelAction = UIAlertAction(title: Constants.Messages.Api.cancelText, style: .default, handler: { (action) in
+    })
+    
     alert.addAction(refreshAction)
+    alert.addAction(cancelAction)
     self.present(alert, animated: true, completion: nil)
   }
   
@@ -243,17 +251,18 @@ extension MainTableViewController {
     
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
   {
-     let selectedProduct: Product
+     var selectedProduct: Product?
      
      // Check to see which table view cell was selected.
      if tableView === self.tableView {
-         selectedProduct = products[indexPath.row]
-     } else {
-         selectedProduct = resultsTableController.filteredProducts[indexPath.row]
+      selectedProduct = products[indexPath.row]
+     }else
+     {
+      selectedProduct = resultsTableController.filteredProducts[indexPath.row]
      }
-     
+    
      self.showActivityIndicator()
-     let request = MainTable.ProductSelected.Request(name:selectedProduct.title,count:selectedProduct.count)
+     let request = MainTable.ProductSelected.Request(name:selectedProduct!.name,count:selectedProduct!.count)
      self.interactor?.requestDetail(request: request)
     
      tableView.deselectRow(at: indexPath, animated: false)
@@ -275,7 +284,7 @@ extension MainTableViewController {
       {
           let cell = tableView.cellForRow(at: indexPath) as! ProductCell
           self.showActivityIndicator()
-          let request = MainTable.Update.Request(products: self.products,product:cell.product!)
+          let request = MainTable.Update.Request(product:cell.product!)
           self.interactor?.requestDelete(request: request)
       }
   }
@@ -304,7 +313,7 @@ extension MainTableViewController
     let label = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 40))
     label.textAlignment = .center
     
-    label.text = "\(Constants.Messages.General.totalText): \(sumCount(products: products))"
+    label.text = "\(Constants.Messages.General.totalText): \(sumCount())"
     
     let stackView   = UIStackView()
     stackView.axis  = NSLayoutConstraint.Axis.horizontal
@@ -412,25 +421,8 @@ extension MainTableViewController: UISearchResultsUpdating
         // Update the filtered array based on the search text.
         let searchResults = products
 
-        // Strip out all the leading and trailing spaces.
-        let whitespaceCharacterSet = CharacterSet.whitespaces
-        let strippedString =
-            searchController.searchBar.text!.trimmingCharacters(in: whitespaceCharacterSet)
-        let searchItems = strippedString.components(separatedBy: " ") as [String]
-
-        // Build all the "AND" expressions for each value in searchString.
-        let andMatchPredicates: [NSPredicate] = searchItems.map
-        { searchString in
-            findMatches(searchString: searchString)
-        }
-
-        // Match up the fields of the Product object.
-        let finalCompoundPredicate =
-            NSCompoundPredicate(andPredicateWithSubpredicates: andMatchPredicates)
-
-        let filteredResults = searchResults.filter
-        { finalCompoundPredicate.evaluate(with: $0) }
-
+        let filteredResults = searchResults.filter("name CONTAINS[c] %@", searchController.searchBar.text!)
+    
         // Apply the filtered results to the search results table.
         if let resultsController = searchController.searchResultsController as? ResultsTableController
         {

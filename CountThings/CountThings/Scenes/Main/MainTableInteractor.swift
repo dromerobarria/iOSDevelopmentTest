@@ -50,84 +50,63 @@ class MainTableInteractor: MainTableBusinessLogic, MainTableDataStore
   {
     let product  = request.product
     
-    /// When is local action
-    /*
-    let products  = request.products
-    products.filter({$0.title == request.product.title}).first!.count = request.product.count + 1
-    let response = MainTable.Update.Response(products: products)
-    self.presenter?.presentIncrease(response: response)
-    */
-    
-    workerCounters = CountersWorker()
-    workerCounters?.increaseCounter(product.id)
-      {[] (isOk,counters,message) in
-        
-        switch isOk
-        {
-        case true:
-          
-          var products = [Product]()
-          for counter in counters
-          {
-            let counterDictionary = counter as! NSDictionary
-            let id = counterDictionary["id"] as? String ?? ""
-            let count = counterDictionary["count"] as? Int ?? 0
-            let name = counterDictionary["title"] as? String ?? "Sin Nombre"
-            let newProduct = Product(title: name, count: count, id: id)
-            products.append(newProduct)
-          }
-          
-          
-          let response = MainTable.Update.Response(isError: false, message: "", products: products)
-          self.presenter?.presentIncrease(response: response)
-        case false:
-          let response = MainTable.Update.Response(isError: false, message: message,products: [])
-          self.presenter?.presentIncrease(response: response)
-        }
+    if Connectivity.isConnectedToInternet
+    {
+      workerCounters = CountersWorker()
+          workerCounters?.increaseCounter(product.remoteID)
+         {[] (isOk,counters,message) in
+           
+           switch isOk
+           {
+           case true:
+             
+             Product.updateCounters(counters: counters)
+             
+             let response = MainTable.Update.Response(isError: false, message: "", products: Product.all())
+             self.presenter?.presentIncrease(response: response)
+           case false:
+             product.updateCounterCount(count: product.count + 1)
+             let response = MainTable.Update.Response(isError: false, message: "", products: Product.all())
+             self.presenter?.presentIncrease(response: response)
+           }
+      }
+    }else
+    {
+      product.updateCounterCount(count: product.count + 1)
+      let response = MainTable.Update.Response(isError: false, message: "", products: Product.all())
+      self.presenter?.presentIncrease(response: response)
     }
-    
-    
-    
   }
   
   func requestDecrease(request: MainTable.Update.Request)
   {
     let product   = request.product
    
-    /// When is local action
-    /*
-    let products  = request.products
-    products.filter({$0.title == product.title}).first!.count = product.count - 1
-    let response = MainTable.Update.Response(products: products)
-    self.presenter?.presentDecrease(response: response)
-    */
-    
-    workerCounters = CountersWorker()
-    workerCounters?.decreaseCounter(product.id)
-      {[] (isOk,counters,message) in
-        
-        switch isOk
-        {
-        case true:
+    if Connectivity.isConnectedToInternet
+    {
+      workerCounters = CountersWorker()
+      workerCounters?.decreaseCounter(product.remoteID)
+        {[] (isOk,counters,message) in
           
-          var products = [Product]()
-          for counter in counters
+          switch isOk
           {
-            let counterDictionary = counter as! NSDictionary
-            let id = counterDictionary["id"] as? String ?? ""
-            let count = counterDictionary["count"] as? Int ?? 0
-            let name = counterDictionary["title"] as? String ?? "Sin Nombre"
-            let newProduct = Product(title: name, count: count, id: id)
-            products.append(newProduct)
+          case true:
+            
+            Product.updateCounters(counters: counters)
+          
+            let response = MainTable.Update.Response(isError: false, message: "", products: Product.all())
+            self.presenter?.presentIncrease(response: response)
+          case false:
+            product.updateCounterCount(count: product.count - 1)
+            let response = MainTable.Update.Response(isError: false, message: "", products: Product.all())
+            self.presenter?.presentIncrease(response: response)
           }
-          
-          
-          let response = MainTable.Update.Response(isError: false, message: "", products: products)
-          self.presenter?.presentIncrease(response: response)
-        case false:
-          let response = MainTable.Update.Response(isError: false, message: message,products: [])
-          self.presenter?.presentIncrease(response: response)
-        }
+      }
+    }else
+    {
+      product.updateCounterCount(count: product.count - 1)
+      let response = MainTable.Update.Response(isError: false, message: "", products: Product.all())
+      self.presenter?.presentIncrease(response: response)
     }
   }
   
@@ -135,124 +114,100 @@ class MainTableInteractor: MainTableBusinessLogic, MainTableDataStore
   {
     
     let product   = request.product
-    
-    /// When is local action
-    /*
-    var products  = request.products
-    let index = products.firstIndex {
-        return $0.title == product.title
-    }
-    products.remove(at: index!)
-    */
-    
-    workerCounters = CountersWorker()
-       workerCounters?.deleteCounter(product.id)
-         {[] (isOk,counters,message) in
-           
-           switch isOk
-           {
-           case true:
-             
-             var products = [Product]()
-             for counter in counters
-             {
-               let counterDictionary = counter as! NSDictionary
-               let id = counterDictionary["id"] as? String ?? ""
-               let count = counterDictionary["count"] as? Int ?? 0
-               let name = counterDictionary["title"] as? String ?? "Sin Nombre"
-               let newProduct = Product(title: name, count: count, id: id)
-               products.append(newProduct)
-             }
-             
-             
-             let response = MainTable.Update.Response(isError: false, message: "", products: products)
-             self.presenter?.presentDelete(response: response)
-           case false:
-             let response = MainTable.Update.Response(isError: false, message: message,products: [])
-             self.presenter?.presentDelete(response: response)
-           }
-    }
-  }
-  
-  func requestCreate(request: MainTable.ProductCreate.Request)
-  {
-    let products  = request.products
-    let name  = request.name
-    
-    let filtered = products.filter{ $0.title.contains(String(name!)) }
-    
-    /// The product already exists with same name
-    if filtered.count > 0
+ 
+    if Connectivity.isConnectedToInternet
     {
-      let response = MainTable.ProductCreate.Response(isError: true, message: Constants.Messages.General.repeatText, products: products)
-         self.presenter?.presentCreate(response: response)
-    }else
-    {
-      
-      /// When is local action
-      /*
-      let newProduct = Product(title: name!, count: 1, id: UUID().uuidString)
-         products.append(newProduct)
-      let response = MainTable.ProductCreate.Response(isError: false, message: "", products: products)
-              self.presenter?.presentCreate(response: response)
-      */
-      
       workerCounters = CountersWorker()
-      workerCounters?.createCounter(String(name!))
+      workerCounters?.deleteCounter(product.remoteID)
         {[] (isOk,counters,message) in
           
           switch isOk
           {
           case true:
             
-            var products = [Product]()
-            for counter in counters
-            {
-              let counterDictionary = counter as! NSDictionary
-              let id = counterDictionary["id"] as? String ?? ""
-              let count = counterDictionary["count"] as? Int ?? 0
-              let name = counterDictionary["title"] as? String ?? "Sin Nombre"
-              let newProduct = Product(title: name, count: count, id: id)
-              products.append(newProduct)
-            }
+            Product.updateCounters(counters: counters)
             
-            let response = MainTable.ProductCreate.Response(isError: false, message: "", products: products)
-            self.presenter?.presentCreate(response: response)
+            let response = MainTable.Update.Response(isError: false, message: "", products: Product.all())
+            self.presenter?.presentDelete(response: response)
           case false:
-            let response = MainTable.ProductCreate.Response(isError: false, message: message, products: products)
-            self.presenter?.presentCreate(response: response)
+            product.delete()
+            let response = MainTable.Update.Response(isError: false, message: "", products: Product.all())
+            self.presenter?.presentDelete(response: response)
           }
       }
+    }else
+    {
+      product.delete()
+      let response = MainTable.Update.Response(isError: false, message: "", products: Product.all())
+      self.presenter?.presentDelete(response: response)
     }
+  }
+  
+  func requestCreate(request: MainTable.ProductCreate.Request)
+  {
+    let name  = request.name
+    let filtered = Product.checkCounter(name: String(name!))
+    
+    if filtered
+    {
+        let response = MainTable.ProductCreate.Response(isError: true, message: Constants.Messages.General.repeatText, products: Product.all())
+        self.presenter?.presentCreate(response: response)
+    }else
+    {
+      if Connectivity.isConnectedToInternet
+      {
+        workerCounters = CountersWorker()
+        workerCounters?.createCounter(String(name!)){[] (isOk,counters,message) in
+           switch isOk
+           {
+           case true:
+             
+             Product.updateCounters(counters: counters)
+             
+             let response = MainTable.ProductCreate.Response(isError: false, message: "", products: Product.all())
+             self.presenter?.presentCreate(response: response)
+           case false:
+              Product.createCounter(name: String(name!))
+              let response = MainTable.ProductCreate.Response(isError: false, message: "", products: Product.all())
+              self.presenter?.presentCreate(response: response)
+           }
+        }
+      }else
+      {
+        Product.createCounter(name: String(name!))
+        let response = MainTable.ProductCreate.Response(isError: false, message: "", products: Product.all())
+        self.presenter?.presentCreate(response: response)
+      }
+    }
+   
   }
   
   func requestCounters(request: MainTable.CountersRequest.Request)
   {
-    workerCounters = CountersWorker()
-    workerCounters?.getCounters()
-      {[] (isOk,counters,message) in
-        
-        switch isOk
-        {
-        case true:
-          
-          var products = [Product]()
-          for counter in counters
+    
+    if Connectivity.isConnectedToInternet
+    {
+      workerCounters = CountersWorker()
+      workerCounters?.getCounters()
+        {[] (isOk,counters,message) in
+           
+          switch isOk
           {
-            let counterDictionary = counter as! NSDictionary
-            let id = counterDictionary["id"] as? String ?? ""
-            let count = counterDictionary["count"] as? Int ?? 0
-            let name = counterDictionary["title"] as? String ?? "Sin Nombre"
-            let newProduct = Product(title: name, count: count, id: id)
-            products.append(newProduct)
+          case true:
+             
+            Product.updateCounters(counters: counters)
+             
+            let response = MainTable.CountersRequest.Response(products: Product.all(), isError: false, message: "")
+            self.presenter?.fetchCounters(response: response)
+          case false:
+            let response = MainTable.CountersRequest.Response(products: Product.all(), isError: true, message: message)
+            self.presenter?.fetchCounters(response: response)
           }
-          
-          let response = MainTable.CountersRequest.Response(products: products, isError: false, message: "")
-          self.presenter?.fetchCounters(response: response)
-        case false:
-          let response = MainTable.CountersRequest.Response(products: [], isError: true, message: message)
-          self.presenter?.fetchCounters(response: response)
-        }
+      }
+    }else
+    {
+      let response = MainTable.CountersRequest.Response(products: Product.all(), isError: false, message: "")
+      self.presenter?.fetchCounters(response: response)
     }
   }
 }
