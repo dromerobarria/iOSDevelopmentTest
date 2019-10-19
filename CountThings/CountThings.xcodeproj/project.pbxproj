@@ -26,7 +26,6 @@
 		FE00B7AE234D846C007A55D1 /* MainTableModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE00B7A8234D846C007A55D1 /* MainTableModels.swift */; };
 		FE00B7AF234D846C007A55D1 /* MainTableInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE00B7A9234D846C007A55D1 /* MainTableInteractor.swift */; };
 		FE00B7B2234D8488007A55D1 /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE00B7B1234D8488007A55D1 /* BaseTableViewController.swift */; };
-		FE00B7B4234D84BE007A55D1 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE00B7B3234D84BE007A55D1 /* Product.swift */; };
 		FE00B7B6234D86EC007A55D1 /* TableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE00B7B5234D86EC007A55D1 /* TableCell.xib */; };
 		FE00B7B9234D8780007A55D1 /* ResultsTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE00B7B8234D8780007A55D1 /* ResultsTableController.swift */; };
 		FE00B7C3234D8B9C007A55D1 /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE00B7C2234D8B9C007A55D1 /* ProductCell.swift */; };
@@ -41,7 +40,7 @@
 		FE02D5F7234F850900B1084F /* MainTablePresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE02D5F3234F850900B1084F /* MainTablePresenterTests.swift */; };
 		FE02D5F8234F850900B1084F /* MainTableWorkerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE02D5F4234F850900B1084F /* MainTableWorkerTests.swift */; };
 		FE02D5F9234F850900B1084F /* MainTableInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE02D5F5234F850900B1084F /* MainTableInteractorTests.swift */; };
-		FE0DD707235A85BB00FCDDF7 /* Counter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0DD706235A85BB00FCDDF7 /* Counter.swift */; };
+		FE0DD707235A85BB00FCDDF7 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0DD706235A85BB00FCDDF7 /* Product.swift */; };
 		FEDA7AF4234ED503003B3B7C /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDA7AF3234ED502003B3B7C /* Utils.swift */; };
 		FEDA7AF9234EDDC8003B3B7C /* APIRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDA7AF8234EDDC8003B3B7C /* APIRouter.swift */; };
 		FEDA7AFB234EDE89003B3B7C /* CountersWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDA7AFA234EDE89003B3B7C /* CountersWorker.swift */; };
@@ -98,7 +97,6 @@
 		FE00B7A8234D846C007A55D1 /* MainTableModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTableModels.swift; sourceTree = "<group>"; };
 		FE00B7A9234D846C007A55D1 /* MainTableInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTableInteractor.swift; sourceTree = "<group>"; };
 		FE00B7B1234D8488007A55D1 /* BaseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
-		FE00B7B3234D84BE007A55D1 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		FE00B7B5234D86EC007A55D1 /* TableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableCell.xib; sourceTree = "<group>"; };
 		FE00B7B8234D8780007A55D1 /* ResultsTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsTableController.swift; sourceTree = "<group>"; };
 		FE00B7C2234D8B9C007A55D1 /* ProductCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductCell.swift; sourceTree = "<group>"; };
@@ -113,7 +111,7 @@
 		FE02D5F3234F850900B1084F /* MainTablePresenterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTablePresenterTests.swift; sourceTree = "<group>"; };
 		FE02D5F4234F850900B1084F /* MainTableWorkerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTableWorkerTests.swift; sourceTree = "<group>"; };
 		FE02D5F5234F850900B1084F /* MainTableInteractorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTableInteractorTests.swift; sourceTree = "<group>"; };
-		FE0DD706235A85BB00FCDDF7 /* Counter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Counter.swift; sourceTree = "<group>"; };
+		FE0DD706235A85BB00FCDDF7 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		FEDA7AF3234ED502003B3B7C /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		FEDA7AF8234EDDC8003B3B7C /* APIRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIRouter.swift; sourceTree = "<group>"; };
 		FEDA7AFA234EDE89003B3B7C /* CountersWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountersWorker.swift; sourceTree = "<group>"; };
@@ -253,8 +251,7 @@
 		FE00B780234D7639007A55D1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				FE00B7B3234D84BE007A55D1 /* Product.swift */,
-				FE0DD706235A85BB00FCDDF7 /* Counter.swift */,
+				FE0DD706235A85BB00FCDDF7 /* Product.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -635,11 +632,10 @@
 				FE00B7AE234D846C007A55D1 /* MainTableModels.swift in Sources */,
 				FEDA7AFD234EDED5003B3B7C /* ConnectivityWorker.swift in Sources */,
 				FE00B7B2234D8488007A55D1 /* BaseTableViewController.swift in Sources */,
-				FE0DD707235A85BB00FCDDF7 /* Counter.swift in Sources */,
+				FE0DD707235A85BB00FCDDF7 /* Product.swift in Sources */,
 				FE00B787234D778C007A55D1 /* Constants.swift in Sources */,
 				FE00B7C3234D8B9C007A55D1 /* ProductCell.swift in Sources */,
 				FE00B7A0234D7EFF007A55D1 /* AppDelegate.swift in Sources */,
-				FE00B7B4234D84BE007A55D1 /* Product.swift in Sources */,
 				FEDA7AF9234EDDC8003B3B7C /* APIRouter.swift in Sources */,
 				FEDA7AFB234EDE89003B3B7C /* CountersWorker.swift in Sources */,
 				FE00B7AB234D846C007A55D1 /* MainTableViewController.swift in Sources */,
