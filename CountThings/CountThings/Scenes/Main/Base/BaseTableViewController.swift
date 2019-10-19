@@ -6,13 +6,14 @@
 //  Copyright (c) 2019 Dromero. All rights reserved.
 
 import UIKit
+import RealmSwift
 
 class BaseTableViewController: UITableViewController
 {
     
     // MARK: - Properties
     
-    var filteredProducts = [Product]()
+    var filteredProducts = Product.all()
  
     // MARK: - Constants
     
@@ -27,6 +28,7 @@ class BaseTableViewController: UITableViewController
         let nib = UINib(nibName: BaseTableViewController.nibName, bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: BaseTableViewController.tableViewCellIdentifier)
         tableView.tableFooterView = UIView()
+        
     }
     
     // MARK: - Configuration

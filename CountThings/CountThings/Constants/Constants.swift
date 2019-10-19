@@ -17,6 +17,7 @@ struct Constants
     static let large:Float = 22.0
   }
   
+  /// Messages used in the App.
   struct Messages
   {
     struct Alert
@@ -43,11 +44,12 @@ struct Constants
       static let internetText = NSLocalizedString("Sin conexión a Internet.", comment: "")
       static let serverErrorText = NSLocalizedString("Lo sentimos ha ocurrido un error.", comment: "")
       static let refreshText = NSLocalizedString("Reintentar", comment: "")
+      static let cancelText = NSLocalizedString("No", comment: "")
     }
   }
 }
 
-
+/// Constants used in Api calls.
 struct Api
 {
   struct Server
@@ -56,6 +58,7 @@ struct Api
     ///False Production
     static let debugURL = true
 
+    /// URL base.
     static let baseURL = "http://localhost:3000" // Production
     static let testUrl = "http://localhost:3000" // Developer
     static let version = "/api/v1/"
@@ -64,6 +67,7 @@ struct Api
 
 struct Config
 {
+  static var local = true
   static var versionApp = "v1.0.0"
   static var versionDevApp = "v1.0.0 Dev."
 }

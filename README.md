@@ -1,3 +1,22 @@
+# Consideraciones
+
+Para la implementación de la network layer se utilizo Alamofire.
+
+En Constans se puede encontrar la URL (en "testUrl") para modificar en caso de probar hacia otra dirección , actualmente es http://localhost:3000.
+
+Se utilizo la arquitectura Clean Swift , utilizando sus templates junto a la documentación de Apple (en el caso de la searchBar, la cual solo tiene la funcionalidad de buscar y no editar sus elementos).
+
+TODO ASAP.
+
+XCTest:
+
+func testNumberOfSectionsInTableViewShouldAlwaysBeOne()
+
+func testPresentFetchedProductsShouldAskViewControllerToDisplayFetchedProducts()
+
+func testNumberOfRowsInAnySectionShouldEqaulNumberOfProductsToDisplay()
+
+
 # iOSDevelopmentTest
 Cornershop iOS Development Test
 
@@ -44,6 +63,7 @@ API endpoints / examples
 
 The following endpoints are expecting a Content-Type: application/json
 
+
 ``` GET /api/v1/counters [ ]
 
 POST { title: "Coffee" } /api/v1/counter [ { id: "adsf", title: "Coffee", count: 0 } ]
@@ -59,3 +79,5 @@ DELETE { id: "qwer" } /api/v1/counter [ { id: "asdf", title: "Coffee", count: 1 
 GET /api/v1/counters [ { id: "asdf", title: "Coffee", count: 1 }, ] ```
 
 NOTE: Each request returns the current state of all counters.
+
+

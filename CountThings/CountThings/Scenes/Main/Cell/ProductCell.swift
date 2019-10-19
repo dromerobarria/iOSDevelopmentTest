@@ -33,7 +33,7 @@ class ProductCell: UITableViewCell {
   
   func configurateCell(){
     
-    self.titleLabel.text = product!.title
+    self.titleLabel.text = product!.name
     self.countLabel.text = "\(Constants.Messages.General.countText): \(product!.count)"
     self.countStepper.autorepeat = false
     self.countStepper.minimumValue = -100.0

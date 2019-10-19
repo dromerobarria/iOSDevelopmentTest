@@ -1,57 +1,103 @@
 //
-//  Product.swift
+//  Counters.swift
 //  CountThings
 //
-//  Created by Danie Romero on 10/9/19.
+//  Created by Danie Romero on 10/18/19.
 //  Copyright © 2019 Dromero. All rights reserved.
 //
 
-import Foundation
+import UIKit
+import RealmSwift
 
-class Product: NSObject, NSCoding {
-    
-    // MARK: - Types
-    
-    private enum CoderKeys: String {
-        case nameKey
-        case countKey
-        case idKey
-    }
-    
+
+class Product: Object
+{
   
-    // MARK: - Properties
-    
-    /** These properties need @objc to make them key value compliant when filtering using NSPredicate,
-        and so they are accessible and usable in Objective-C to interact with other frameworks.
-    */
-    @objc let title: String
-    @objc var count: Int
-    @objc let id: String
-    
-    // MARK: - Initializers
-    
-    init(title: String, count: Int,id:String) {
-        self.title = title
-        self.count = count
-        self.id = id
-    }
-    
-    // MARK: - NSCoding
+  @objc dynamic var remoteID = ""
+  @objc dynamic var name = ""
+  @objc dynamic var count = 0
+ 
   
-  /// This is called for UIStateRestoration
-    required init?(coder aDecoder: NSCoder) {
-    guard let decodedTitle = aDecoder.decodeObject(forKey: CoderKeys.nameKey.rawValue) as? String else {
-      fatalError("A title did not exist. In your app, handle this gracefully.")
+  override static func primaryKey() -> String?
+  {
+    return "remoteID"
+  }
+  
+}
+
+extension Product {
+  
+  func save() {
+    let realm = try! Realm()
+    try! realm.write {
+      realm.add(self)
     }
-      title = decodedTitle
-      count = aDecoder.decodeInteger(forKey: CoderKeys.countKey.rawValue)
-      id = aDecoder.decodeObject(forKey: CoderKeys.idKey.rawValue) as! String
+  }
+  
+  class func all() -> Results<Product> {
+    let realm = try! Realm()
+    return realm.objects(Product.self)
+  }
+  
+  
+  func delete() {
+    let realm = try! Realm()
+    try! realm.write {
+      realm.delete(self)
+    }
+  }
+  
+  func updateCounterCount(count: Int)
+  {
+    let realm = try! Realm()
+    try! realm.write
+    {
+      self.count = count
+      realm.add(self)
+    }
+  }
+
+  class func checkCounter(name: String) -> Bool
+  {
+    let realm = try! Realm()
+    guard realm.objects(Product.self).filter("name = %@", name).count > 0  else {
+        return false
+    }
+    return true
+  }
+ 
+  class func createCounter(name: String)
+  {
+    let counterNew = Product()
+    counterNew.remoteID = UUID().uuidString
+    counterNew.name = name
+    counterNew.count = 1
+    counterNew.save()
+  }
+  
+  class func updateCounters(counters: NSArray)
+  {
+    
+    let realm = try! Realm()
+    let countersDB = realm.objects(Product.self)
+    try! realm.write
+    {
+      realm.delete(countersDB)
     }
     
-    func encode(with aCoder: NSCoder) {
-        aCoder.encode(title, forKey: CoderKeys.nameKey.rawValue)
-        aCoder.encode(count, forKey: CoderKeys.countKey.rawValue)
-        aCoder.encode(id, forKey: CoderKeys.idKey.rawValue)
+    for counter in counters
+    {
+      let counterDictionary = counter as! NSDictionary
+      let id = counterDictionary["id"] as? String ?? ""
+      let count = counterDictionary["count"] as? Int ?? 0
+      let name = counterDictionary["title"] as? String ?? "Sin Nombre"
+      
+      let counterNew = Product()
+      counterNew.remoteID = id
+      counterNew.name = name
+      counterNew.count = count
+      counterNew.save()
     }
-    
+  }
+  
 }
