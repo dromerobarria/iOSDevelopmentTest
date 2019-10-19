@@ -42,9 +42,9 @@ struct Constants
     
     struct Api {
       static let internetText = NSLocalizedString("Sin conexión a Internet.", comment: "")
-      static let serverErrorText = NSLocalizedString("Lo sentimos ha ocurrido un error.", comment: "")
+      static let serverErrorText = NSLocalizedString("Lo sentimos ha ocurrido un error con el servidor.", comment: "")
       static let refreshText = NSLocalizedString("Reintentar", comment: "")
-      static let cancelText = NSLocalizedString("No", comment: "")
+      static let cancelText = NSLocalizedString("Continuar", comment: "")
     }
   }
 }
