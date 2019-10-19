@@ -246,7 +246,7 @@ class MainTableViewController: BaseTableViewController, MainTableDisplayLogic,Ac
 }
 
 // MARK: - UITableViewDelegate
-
+ 
 extension MainTableViewController {
     
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
