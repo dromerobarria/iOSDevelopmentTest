@@ -2,10 +2,18 @@
 # Roadmap
 - No funciona offline / No tiene persistencia de datos * Solo funciona conectada a internet.
 
-Solución: Se genera base de datos (Realm) para persistencia de datos, falta por resolver cambios en offline ya que no existe endpoint para actualizar cambios en general solo de a uno.
+Solución: Se genera majeo offline o online de la App. 
+TODO: Permitir funcionalidad mixta, el problema radica en que no existe endpoint para actualizar contadores sino acciones por separado. Primera idea seria al realizar cambios y tener internet hacer el cambio e comparar diferencias para usando endpoint de crear Counter generar nuevamente el counter con su count, evitando el caso :
 
-TODO
-Permitir modificaciones offline y luego actualziar en server.
+OFFLINE 
+Counter total: 1
+Aumento el count
+Counter total: 2
+Aumento el count
+
+ONLINE
+Counter total: 3
+Aumento el count , tengo internet creo de nuevo el counter con count 3 y no llamar dos veces a /inc.
 
 
 # Respuesta
