@@ -66,6 +66,7 @@ struct Api
 
 struct Config
 {
+  static var local = true
   static var versionApp = "v1.0.0"
   static var versionDevApp = "v1.0.0 Dev."
 }

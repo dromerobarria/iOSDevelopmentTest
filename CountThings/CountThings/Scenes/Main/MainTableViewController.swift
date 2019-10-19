@@ -122,9 +122,13 @@ class MainTableViewController: BaseTableViewController, MainTableDisplayLogic,Ac
     NotificationCenter.default.addObserver(self, selector: #selector(MainTableViewController.increaseValue), name: Notification.Name("increaseValue"), object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(MainTableViewController.decreaseValue), name: Notification.Name("decreaseValue"), object: nil)
     
-    self.showActivityIndicator()
-    let request = MainTable.CountersRequest.Request()
-    self.interactor?.requestCounters(request: request)
+    if !Config.local
+    {
+      self.showActivityIndicator()
+      let request = MainTable.CountersRequest.Request()
+      self.interactor?.requestCounters(request: request)
+      
+    }
     
   }
   

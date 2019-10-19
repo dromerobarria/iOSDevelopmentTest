@@ -6,7 +6,8 @@ target 'CountThings' do
   use_frameworks!
   # Pods network
   pod 'Alamofire'
-  
+  # Pods Conection
+  pod 'RealmSwift'
   # Pods for CountThings
 
   target 'CountThingsTests' do
