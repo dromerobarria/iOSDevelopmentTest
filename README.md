@@ -5,14 +5,21 @@
 Solución: Se genera manejo offline o online de la App. 
 TODO: Permitir funcionalidad mixta, el problema radica en que no existe endpoint para actualizar contadores sino acciones por separado. Primera idea seria al realizar cambios y tener internet hacer el cambio e comparar diferencias para usando endpoint de crear Counter generar nuevamente el counter con su count, evitando el caso :
 
+
 OFFLINE 
+
 Counter total: 1
+
 Aumento el count
+
 Counter total: 2
+
 Aumento el count
 
 ONLINE
+
 Counter total: 3
+
 Aumento el count , tengo internet creo de nuevo el counter con count 3 y no llamar dos veces a /inc.
 
 
