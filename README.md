@@ -2,7 +2,7 @@
 # Roadmap
 - No funciona offline / No tiene persistencia de datos * Solo funciona conectada a internet.
 
-Solución: Se genera majeo offline o online de la App. 
+Solución: Se genera manejo offline o online de la App. 
 TODO: Permitir funcionalidad mixta, el problema radica en que no existe endpoint para actualizar contadores sino acciones por separado. Primera idea seria al realizar cambios y tener internet hacer el cambio e comparar diferencias para usando endpoint de crear Counter generar nuevamente el counter con su count, evitando el caso :
 
 OFFLINE 
