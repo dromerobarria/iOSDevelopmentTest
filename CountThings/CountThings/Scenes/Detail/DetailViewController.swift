@@ -21,6 +21,7 @@ class DetailViewController: UIViewController, DetailDisplayLogic,ActivityIndicat
   
   @IBOutlet private weak var nameLabel: UILabel!
   @IBOutlet private weak var countLabel: UILabel!
+  @IBOutlet weak var contentView: UIView!
   
   
   // MARK: Object lifecycle
@@ -70,8 +71,16 @@ class DetailViewController: UIViewController, DetailDisplayLogic,ActivityIndicat
   override func viewDidLoad()
   {
     super.viewDidLoad()
+    
+    self.contentView.backgroundColor = Constants.Colors.backgroundColor
+    self.contentView.layer.borderWidth = 1
+    self.contentView.layer.borderColor = UIColor.white.cgColor
+    self.contentView.layer.cornerRadius = 8
+    
     nameLabel.textAlignment = .left
     countLabel.textAlignment = .left
+    nameLabel.alpha = 1
+    countLabel.alpha = 0.8
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -81,6 +90,9 @@ class DetailViewController: UIViewController, DetailDisplayLogic,ActivityIndicat
           self.navigationItem.largeTitleDisplayMode = .never
       }
     
+      navigationController?.navigationBar.barTintColor = .black
+      navigationController?.navigationBar.tintColor = Constants.Colors.backgroundColor
+      self.view.backgroundColor = .black
       self.showActivityIndicator()
       let request = Detail.ProductSelected.Request()
       self.interactor?.requestProductSelected(request: request)
@@ -90,7 +102,7 @@ class DetailViewController: UIViewController, DetailDisplayLogic,ActivityIndicat
   {
     self.hideActivityIndicator()
     nameLabel.text = "\(Constants.Messages.General.nameText) : \(viewModel.name!)"
-    countLabel.text = "\(Constants.Messages.General.countText) :\(viewModel.count!)"
+    countLabel.text = "\(Constants.Messages.General.countText) : \(viewModel.count!)"
   }
  
 }

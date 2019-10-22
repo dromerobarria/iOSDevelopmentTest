@@ -28,12 +28,14 @@ class BaseTableViewController: UITableViewController
         let nib = UINib(nibName: BaseTableViewController.nibName, bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: BaseTableViewController.tableViewCellIdentifier)
         tableView.tableFooterView = UIView()
-        
+        tableView.backgroundColor = .black
+        tableView.separatorStyle = .none
     }
     
     // MARK: - Configuration
     func configureCell(_ cell: ProductCell, forProduct product: Product,enable:Bool)
     {
+      cell.selectionStyle = .none
       cell.enable = enable
       cell.product = product
     }

@@ -12,7 +12,6 @@
 		EF5CE0C985D10DFFB1EA8979 /* Pods_CountThingsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE99A70ADD84204FCE0A0BED /* Pods_CountThingsUITests.framework */; };
 		FE00B756234D74E1007A55D1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE00B755234D74E1007A55D1 /* Assets.xcassets */; };
 		FE00B759234D74E1007A55D1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE00B758234D74E1007A55D1 /* Preview Assets.xcassets */; };
-		FE00B75C234D74E1007A55D1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE00B75A234D74E1007A55D1 /* LaunchScreen.storyboard */; };
 		FE00B767234D74E1007A55D1 /* CountThingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE00B766234D74E1007A55D1 /* CountThingsTests.swift */; };
 		FE00B772234D74E1007A55D1 /* CountThingsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE00B771234D74E1007A55D1 /* CountThingsUITests.swift */; };
 		FE00B785234D7672007A55D1 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE00B784234D7672007A55D1 /* Extensions.swift */; };
@@ -41,6 +40,9 @@
 		FE02D5F8234F850900B1084F /* MainTableWorkerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE02D5F4234F850900B1084F /* MainTableWorkerTests.swift */; };
 		FE02D5F9234F850900B1084F /* MainTableInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE02D5F5234F850900B1084F /* MainTableInteractorTests.swift */; };
 		FE0DD707235A85BB00FCDDF7 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0DD706235A85BB00FCDDF7 /* Product.swift */; };
+		FE40555B235EA3F5000D32F2 /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE40555A235EA3F5000D32F2 /* LaunchScreenViewController.swift */; };
+		FE40555D235EA48D000D32F2 /* avocado.json in Resources */ = {isa = PBXBuildFile; fileRef = FE40555C235EA48D000D32F2 /* avocado.json */; };
+		FE405562235EA64D000D32F2 /* Splash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE405561235EA64D000D32F2 /* Splash.storyboard */; };
 		FEDA7AF4234ED503003B3B7C /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDA7AF3234ED502003B3B7C /* Utils.swift */; };
 		FEDA7AF9234EDDC8003B3B7C /* APIRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDA7AF8234EDDC8003B3B7C /* APIRouter.swift */; };
 		FEDA7AFB234EDE89003B3B7C /* CountersWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDA7AFA234EDE89003B3B7C /* CountersWorker.swift */; };
@@ -78,7 +80,6 @@
 		FE00B74C234D74E0007A55D1 /* CountThings.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CountThings.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE00B755234D74E1007A55D1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FE00B758234D74E1007A55D1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		FE00B75B234D74E1007A55D1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FE00B75D234D74E1007A55D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FE00B762234D74E1007A55D1 /* CountThingsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CountThingsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE00B766234D74E1007A55D1 /* CountThingsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountThingsTests.swift; sourceTree = "<group>"; };
@@ -112,6 +113,9 @@
 		FE02D5F4234F850900B1084F /* MainTableWorkerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTableWorkerTests.swift; sourceTree = "<group>"; };
 		FE02D5F5234F850900B1084F /* MainTableInteractorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTableInteractorTests.swift; sourceTree = "<group>"; };
 		FE0DD706235A85BB00FCDDF7 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		FE40555A235EA3F5000D32F2 /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
+		FE40555C235EA48D000D32F2 /* avocado.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = avocado.json; sourceTree = "<group>"; };
+		FE405561235EA64D000D32F2 /* Splash.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Splash.storyboard; sourceTree = "<group>"; };
 		FEDA7AF3234ED502003B3B7C /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		FEDA7AF8234EDDC8003B3B7C /* APIRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIRouter.swift; sourceTree = "<group>"; };
 		FEDA7AFA234EDE89003B3B7C /* CountersWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountersWorker.swift; sourceTree = "<group>"; };
@@ -242,6 +246,7 @@
 		FE00B77F234D7616007A55D1 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				FE405555235EA2E0000D32F2 /* LaunchScreen */,
 				FE00B7D0234D8FF8007A55D1 /* Detail */,
 				FE00B7A3234D846C007A55D1 /* Main */,
 			);
@@ -267,6 +272,7 @@
 		FE00B782234D764D007A55D1 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				FE40555C235EA48D000D32F2 /* avocado.json */,
 				FE00B755234D74E1007A55D1 /* Assets.xcassets */,
 			);
 			path = Resources;
@@ -292,10 +298,10 @@
 		FE00B789234D78BB007A55D1 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				FE405560235EA64D000D32F2 /* Splash */,
 				FE00B7DD234D918D007A55D1 /* Detail */,
 				FE00B796234D7AA4007A55D1 /* Main */,
 				FE00B7B7234D8709007A55D1 /* Cell */,
-				FE00B75A234D74E1007A55D1 /* LaunchScreen.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -388,6 +394,22 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
+		FE405555235EA2E0000D32F2 /* LaunchScreen */ = {
+			isa = PBXGroup;
+			children = (
+				FE40555A235EA3F5000D32F2 /* LaunchScreenViewController.swift */,
+			);
+			path = LaunchScreen;
+			sourceTree = "<group>";
+		};
+		FE405560235EA64D000D32F2 /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				FE405561235EA64D000D32F2 /* Splash.storyboard */,
+			);
+			path = Splash;
+			sourceTree = "<group>";
+		};
 		FEDA7AF2234ED502003B3B7C /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -415,7 +437,7 @@
 				FE00B748234D74E0007A55D1 /* Sources */,
 				FE00B749234D74E0007A55D1 /* Frameworks */,
 				FE00B74A234D74E0007A55D1 /* Resources */,
-				53B569AFA9478C097947F6C7 /* [CP] Embed Pods Frameworks */,
+				BD11F221CA1CDD6EF2A006B5 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -512,11 +534,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FE00B75C234D74E1007A55D1 /* LaunchScreen.storyboard in Resources */,
 				FE00B759234D74E1007A55D1 /* Preview Assets.xcassets in Resources */,
 				FE00B756234D74E1007A55D1 /* Assets.xcassets in Resources */,
+				FE405562235EA64D000D32F2 /* Splash.storyboard in Resources */,
 				FE00B798234D7AAF007A55D1 /* Main.storyboard in Resources */,
 				FE00B7B6234D86EC007A55D1 /* TableCell.xib in Resources */,
+				FE40555D235EA48D000D32F2 /* avocado.json in Resources */,
 				FE00B7DF234D91A0007A55D1 /* Detail.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -558,23 +581,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		53B569AFA9478C097947F6C7 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CountThings/Pods-CountThings-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CountThings/Pods-CountThings-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CountThings/Pods-CountThings-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		65229BA70FAA9008C40E7B7C /* [CP] Check Pods Manifest.lock */ = {
@@ -621,6 +627,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		BD11F221CA1CDD6EF2A006B5 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CountThings/Pods-CountThings-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CountThings/Pods-CountThings-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CountThings/Pods-CountThings-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -638,6 +661,7 @@
 				FE00B7A0234D7EFF007A55D1 /* AppDelegate.swift in Sources */,
 				FEDA7AF9234EDDC8003B3B7C /* APIRouter.swift in Sources */,
 				FEDA7AFB234EDE89003B3B7C /* CountersWorker.swift in Sources */,
+				FE40555B235EA3F5000D32F2 /* LaunchScreenViewController.swift in Sources */,
 				FE00B7AB234D846C007A55D1 /* MainTableViewController.swift in Sources */,
 				FE00B7D8234D8FF8007A55D1 /* DetailPresenter.swift in Sources */,
 				FE00B7AC234D846C007A55D1 /* MainTableRouter.swift in Sources */,
@@ -689,17 +713,6 @@
 			targetProxy = FE00B76E234D74E1007A55D1 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		FE00B75A234D74E1007A55D1 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FE00B75B234D74E1007A55D1 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		FE00B774234D74E1007A55D1 /* Debug */ = {
@@ -825,12 +838,14 @@
 				DEVELOPMENT_ASSET_PATHS = "\"CountThings/Preview Content\"";
 				DEVELOPMENT_TEAM = VP6733N44J;
 				ENABLE_PREVIEWS = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = CountThings/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = Dromero.CountThings;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -847,12 +862,14 @@
 				DEVELOPMENT_ASSET_PATHS = "\"CountThings/Preview Content\"";
 				DEVELOPMENT_TEAM = VP6733N44J;
 				ENABLE_PREVIEWS = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = CountThings/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = Dromero.CountThings;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

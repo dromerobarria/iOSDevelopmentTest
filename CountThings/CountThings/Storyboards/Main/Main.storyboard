@@ -2,11 +2,12 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="RV5-VI-GSM">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--iOS Development Test-->
+        <!--Counters-->
         <scene sceneID="YxM-rA-tPJ">
             <objects>
                 <tableViewController storyboardIdentifier="MainTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="7DQ-TE-sF8" customClass="MainTableViewController" customModule="CountThings" customModuleProvider="target" sceneMemberID="viewController">
@@ -19,7 +20,7 @@
                             <outlet property="delegate" destination="7DQ-TE-sF8" id="or7-Nz-OgP"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="iOS Development Test" largeTitleDisplayMode="always" id="9Hc-tl-VW6"/>
+                    <navigationItem key="navigationItem" title="Counters" largeTitleDisplayMode="always" id="9Hc-tl-VW6"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q2X-7C-17e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -28,7 +29,7 @@
         <!--Navigation Controller-->
         <scene sceneID="xcg-RH-3xM">
             <objects>
-                <navigationController useStoryboardIdentifierAsRestorationIdentifier="YES" id="RV5-VI-GSM" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="MainTableViewControllerNav" useStoryboardIdentifierAsRestorationIdentifier="YES" id="RV5-VI-GSM" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="ybQ-Fi-XDL">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>

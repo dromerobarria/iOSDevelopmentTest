@@ -99,6 +99,10 @@ class MainTableViewController: BaseTableViewController, MainTableDisplayLogic,Ac
   override func viewDidLoad()
   {
     super.viewDidLoad()
+        
+    tableView.backgroundColor = .black
+    tableView.separatorStyle = .none
+    
     configureNavegationBar()
    
     resultsTableController = ResultsTableController()
@@ -136,18 +140,32 @@ class MainTableViewController: BaseTableViewController, MainTableDisplayLogic,Ac
   /// NavigationBar
   func configureNavegationBar()
   {
-    title = Constants.Messages.General.navText
+    
+    let navLabel = UILabel()
+    let fullString = NSMutableAttributedString(string: Constants.Messages.General.navTextFirst)
+    let image1Attachment = NSTextAttachment()
+    image1Attachment.image = Constants.Images.ic_asset_icon
+    let image1String = NSAttributedString(attachment: image1Attachment)
+    fullString.append(image1String)
+    fullString.append(NSAttributedString(string: Constants.Messages.General.navTextLast))
+    navLabel.attributedText = fullString
+    self.navigationItem.titleView = navLabel
+    
+    title = Constants.Messages.General.navTitleText
     let add = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(MainTableViewController.addTapped))
+    add.tintColor = Constants.Colors.backgroundColor
     navigationItem.rightBarButtonItems = [add]
+    
+    navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: Constants.Colors.backgroundColor]
   }
   
   @objc func addTapped(_ sender: UIBarButtonItem)
   {
-    let alert = UIAlertController(title: Constants.Messages.General.navText, message: Constants.Messages.General.createAlertText, preferredStyle: .alert)
+    let alert = UIAlertController(title: Constants.Messages.Alert.titleCreateText, message: Constants.Messages.General.createAlertText, preferredStyle: .alert)
     
     alert.addTextField()
 
-    let createAction = UIAlertAction(title: Constants.Messages.General.createText, style: .default) { [unowned alert] _ in
+    let createAction = UIAlertAction(title: Constants.Messages.Alert.createText, style: .default) { [unowned alert] _ in
         let name = alert.textFields![0].text
         
         self.showActivityIndicator()
@@ -157,9 +175,10 @@ class MainTableViewController: BaseTableViewController, MainTableDisplayLogic,Ac
 
     let cancelAction = UIAlertAction(title: Constants.Messages.Alert.cancelText, style: .cancel, handler: nil)
     
-    alert.addAction(createAction)
+    createAction.setValue(Constants.Colors.backgroundColor, forKey: "titleTextColor")
+    cancelAction.setValue(Constants.Colors.backgroundColor, forKey: "titleTextColor")
     alert.addAction(cancelAction)
-   
+    alert.addAction(createAction)
     self.present(alert, animated: true, completion: nil)
   }
   
@@ -195,7 +214,7 @@ class MainTableViewController: BaseTableViewController, MainTableDisplayLogic,Ac
   {
     self.hideActivityIndicator()
     self.products = viewModel.products
-    self.tableView.reloadData()
+    self.reloadData()
   }
   
   func errorUpdate(viewModel: MainTable.Update.ViewModel)
@@ -208,7 +227,7 @@ class MainTableViewController: BaseTableViewController, MainTableDisplayLogic,Ac
   {
     self.hideActivityIndicator()
     self.products = viewModel.products
-    self.tableView.reloadData()
+    self.reloadData()
   }
   
   func errorCreate(viewModel: MainTable.ProductCreate.ViewModel)
@@ -231,6 +250,8 @@ class MainTableViewController: BaseTableViewController, MainTableDisplayLogic,Ac
     let cancelAction = UIAlertAction(title: Constants.Messages.Api.cancelText, style: .default, handler: { (action) in
     })
     
+    refreshAction.setValue(Constants.Colors.backgroundColor, forKey: "titleTextColor")
+    cancelAction.setValue(Constants.Colors.backgroundColor, forKey: "titleTextColor")
     alert.addAction(refreshAction)
     alert.addAction(cancelAction)
     self.present(alert, animated: true, completion: nil)
@@ -240,7 +261,14 @@ class MainTableViewController: BaseTableViewController, MainTableDisplayLogic,Ac
   {
     self.hideActivityIndicator()
     self.products = viewModel.products
-    self.tableView.reloadData()
+    self.reloadData()
+  }
+  
+  func reloadData()
+  {
+    let range = NSMakeRange(0, self.tableView.numberOfSections)
+    let sections = NSIndexSet(indexesIn: range)
+    tableView.reloadSections(sections as IndexSet, with: .fade)
   }
   
 }
@@ -296,6 +324,11 @@ extension MainTableViewController {
 extension MainTableViewController
 {
   
+  override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
+  {
+      return 60
+  }
+  
   override func numberOfSections(in tableView: UITableView) -> Int
   {
     return 1
@@ -314,6 +347,7 @@ extension MainTableViewController
     label.textAlignment = .center
     
     label.text = "\(Constants.Messages.General.totalText): \(sumCount())"
+    label.textColor = Constants.Colors.backgroundColor
     
     let stackView   = UIStackView()
     stackView.axis  = NSLayoutConstraint.Axis.horizontal
@@ -338,7 +372,7 @@ extension MainTableViewController
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
   {
     let cell = tableView.dequeueReusableCell(withIdentifier: BaseTableViewController.tableViewCellIdentifier, for: indexPath) as! ProductCell
-    
+    cell.selectionStyle = .none
     let product = products[indexPath.row]
     configureCell(cell, forProduct: product,enable:true)
     return cell
